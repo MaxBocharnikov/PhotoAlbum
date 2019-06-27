@@ -6,7 +6,7 @@
       <ion-label>All Photos</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="myphotos">
+    <ion-tab-button *ngIf="this.userService.isLogin;" tab="myphotos">
       <ion-icon name="image"></ion-icon>
       <ion-label>My Photos</ion-label>
     </ion-tab-button>
