@@ -30,49 +30,8 @@
           "authorName": "Alex Serra",
           "text": "Cool",
           "date": "2019-04-30T12:11:41.511Z"
-        },
-        {
-          "id": 1,
-          "authorId": 2,
-          "authorName": "David Martin",
-          "text": "Awesome. Very well!!!",
-          "date": "2019-04-24T14:15:41.511Z"
-        },
-        {
-          "id": 2,
-          "authorId": 3,
-          "authorName": "Bryan B",
-          "text": "Damn",
-          "date": "2019-04-26T21:10:42.511Z"
-        },
-        {
-          "id": 3,
-          "authorId": 3,
-          "authorName": "Alex Serra",
-          "text": "Cool",
-          "date": "2019-04-30T12:11:41.511Z"
-        },
-        {
-          "id": 1,
-          "authorId": 2,
-          "authorName": "David Martin",
-          "text": "Awesome. Very well!!!",
-          "date": "2019-04-24T14:15:41.511Z"
-        },
-        {
-          "id": 2,
-          "authorId": 3,
-          "authorName": "Bryan B",
-          "text": "Damn",
-          "date": "2019-04-26T21:10:42.511Z"
-        },
-        {
-          "id": 3,
-          "authorId": 3,
-          "authorName": "Alex Serra",
-          "text": "Cool",
-          "date": "2019-04-30T12:11:41.511Z"
         }
+
       ]
 
     },

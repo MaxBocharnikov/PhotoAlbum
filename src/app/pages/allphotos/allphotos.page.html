@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>allphotos</ion-title>
-    <div style="display: flex; justify-content: space-around">
+    <ion-title>Photo Album</ion-title>
+    <div class="sort-controls">
       <div>
         <ion-label (click)="changeSortType('new')">New First
           <ion-icon name="radio-button-{{sorting.newerNameLabel}}"></ion-icon>
@@ -18,6 +18,9 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ng-container *ngIf="!loadError; else error">
     <app-photo [photoList]="photos | photoSort: sorting.sortBy"></app-photo>
   </ng-container>

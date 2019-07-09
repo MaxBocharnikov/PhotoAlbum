@@ -27,15 +27,15 @@ export class AllphotosPage implements OnInit {
       this.photosService.getAllPhotos().subscribe((data: Photo) => {
               this.photos = data;
               setTimeout(() => {
-                  console.log()
                   this.loading.dismiss();
-              }, 2000);
+              }, 1500);
+              //this.loading.dismiss();  // Без таймаута ошибка!!!
           },
           (error) => {
               this.loadError = true;
               setTimeout(() => {
                   this.loading.dismiss();
-              }, 2000);
+              }, 1500);
               this.presentAlert();
           }
       );
@@ -69,4 +69,20 @@ export class AllphotosPage implements OnInit {
         return await this.loading.present();
     }
 
+    doRefresh(event) {
+        this.photosService.getAllPhotos().subscribe((data: Photo) => {  // Повторение кода в ngOnInit. Необоходимо продумать структуру.
+                this.photos = data;
+                setTimeout(() => {
+                    event.target.complete();
+                }, 1500);
+            },
+            (error) => {
+                this.loadError = true;
+                setTimeout(() => {
+                    event.target.complete();
+                }, 1500);
+
+            }
+        );
+    }
 }

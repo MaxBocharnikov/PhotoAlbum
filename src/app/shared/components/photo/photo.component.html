@@ -1,6 +1,7 @@
-<ion-card *ngFor="let photo of photos">
+<ion-card class="photo" *ngFor="let photo of photos">
     <ion-label class="photo__author">{{photo.authorName}}</ion-label>
       <ion-img  class="photo__img" [src]="photo.img"></ion-img>
+      <ion-card-title class="photo__title">{{photo.title}}</ion-card-title>
       <p class="photo__text">{{photo.text}}</p>
       <div class="photo__info">
         <ion-label class="photo__date">Added {{photo.date | date: 'short'}}</ion-label>

@@ -1,0 +1,20 @@
+ion-toolbar {
+  margin-top: 5px;
+  padding: 5px;
+}
+
+ion-title {
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.sort-controls {
+  display: flex;
+  justify-content: space-around;
+
+  ion-icon {
+    stroke: #3880ff;
+    fill: #3880ff;
+  }
+}

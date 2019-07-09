@@ -2,8 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {commentsTrigger} from '../../animations/comments.animation';
 import {Photo} from '../../interfaces/photo';
 
-
-
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
