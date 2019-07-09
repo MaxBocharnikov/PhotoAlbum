@@ -1,0 +1,15 @@
+ <ion-label class="photo__author">{{photo.authorName}}</ion-label>
+  <ion-img  class="photo__img" [src]="photo.img"></ion-img>
+  <p class="photo__text">{{photo.text}}</p>
+  <div class="photo__info">
+    <ion-label class="photo__date">Added {{photo.date | date: 'short'}}</ion-label>
+    <div class="photo__rating">
+      <ion-icon *ngFor="let photo of getStars(photo.rating).star" name="star"></ion-icon>
+      <ion-icon *ngFor="let photo of getStars(photo.rating).starOut" name="star-outline"></ion-icon>
+    </div>
+  </div>
+  <ion-button class="photo__button" (click)="toggleComments()" expand="block" [disabled]="!photo.comments.length" *ngIf="!isCommentsShow; else hideComments">Show Comments ({{photo.comments.length}})</ion-button>
+ <ng-template #hideComments>
+   <ion-button class="photo__button" (click)="toggleComments()" expand="block" *ngIf="isCommentsShow">Hide Comments ({{photo.comments.length}})</ion-button>
+ </ng-template>
+ <app-comments [comments]="photo.comments" *ngIf="isCommentsShow"></app-comments>

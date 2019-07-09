@@ -1,0 +1,22 @@
+.comments__list {
+  max-height: 250px;
+  overflow-y: scroll;
+}
+.comments__item {
+  padding-bottom: 20px;
+}
+
+.comments__content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.comments__author {
+  font-weight: 600;
+  margin-right: 10px;
+
+}
+
+.comments__date {
+  font-style: italic;
+}

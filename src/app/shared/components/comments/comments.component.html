@@ -1,0 +1,9 @@
+<div class="comments__list">
+  <div padding class="comments__item" *ngFor="let comment of comments">
+    <div class="comments__author"><ion-label>{{comment.authorName}}</ion-label></div>
+    <div class="comments__text">{{comment.text}}</div>
+    <div class="comments__date"><ion-label>{{comment.date | date: 'short'}}</ion-label></div>
+  </div>
+</div>
+
+

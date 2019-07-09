@@ -6,11 +6,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AllphotosPage } from './allphotos.page';
+import {PhotoSortPipe} from '../../shared/pipes/photo-sort.pipe';
+import {PhotoComponent} from '../../shared/components/photo/photo.component';
+import {CommentsComponent} from '../../shared/components/comments/comments.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AllphotosPage
+    component: AllphotosPage,
+      children: [
+          {path: ':id/comments', component: CommentsComponent}
+      ]
   }
 ];
 
@@ -21,6 +27,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AllphotosPage]
+  declarations: [AllphotosPage, PhotoSortPipe,  PhotoComponent, CommentsComponent]
 })
 export class AllphotosPageModule {}

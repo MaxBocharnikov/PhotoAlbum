@@ -1,9 +1,30 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>allphotos</ion-title>
+    <div style="display: flex; justify-content: space-around">
+      <div>
+        <ion-label (click)="changeSortType('new')">New First
+          <ion-icon name="radio-button-{{sorting.newerNameLabel}}"></ion-icon>
+        </ion-label>
+
+      </div>
+      <div>
+        <ion-label (click)="changeSortType('popular')">Popular First
+          <ion-icon name="radio-button-{{sorting.popularNameLabel}}"></ion-icon>
+        </ion-label>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ng-container *ngIf="!loadError; else error">
+    <ion-card *ngFor="let photo of photos | photoSort:sorting.sortBy">
+      <app-photo [photoItem]="photo"></app-photo>
+    </ion-card>
+  </ng-container>
+  <ng-template #error>
+    <p>Failed to Load</p>
+  </ng-template>
 
 </ion-content>
