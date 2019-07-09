@@ -19,9 +19,7 @@
 
 <ion-content padding>
   <ng-container *ngIf="!loadError; else error">
-    <ion-card *ngFor="let photo of photos | photoSort:sorting.sortBy">
-      <app-photo [photoItem]="photo"></app-photo>
-    </ion-card>
+    <app-photo [photoList]="photos | photoSort: sorting.sortBy"></app-photo>
   </ng-container>
   <ng-template #error>
     <p>Failed to Load</p>
