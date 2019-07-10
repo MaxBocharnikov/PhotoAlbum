@@ -4,13 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserService {
-  public isLogin = false;
+  private user: {id: number} = {
+    id: 1
+  };
 
-  constructor() { }
-
-
-  authToggle() {
-    this.isLogin = !this.isLogin;
+  getUser(): {id: number} {
+    return this.user;
   }
+  constructor() { }
 
 }

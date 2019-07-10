@@ -13,7 +13,7 @@ export class UserPage implements OnInit {
   }
 
   toggleLog() {
-    this.userService.authToggle();
+   // this.userService.authToggle();
   }
 
 }

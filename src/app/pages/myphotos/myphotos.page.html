@@ -4,6 +4,6 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <app-photo *ngFor="let photo of userPhotos" [photo]="photo"></app-photo>
 </ion-content>
