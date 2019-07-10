@@ -10,7 +10,6 @@ import {Photo} from '../../interfaces/photo';
 })
 export class CommentsComponent implements OnInit {
   @Input() comments: {};
-  @Input() photo: Photo;
   isCommentsShow = false;
 
   constructor() { }

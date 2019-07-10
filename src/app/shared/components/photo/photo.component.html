@@ -1,4 +1,4 @@
-<ion-card class="photo" *ngFor="let photo of photos">
+<ion-card class="photo">
     <ion-label class="photo__author">{{photo.authorName}}</ion-label>
       <ion-img  class="photo__img" [src]="photo.img"></ion-img>
       <ion-card-title class="photo__title">{{photo.title}}</ion-card-title>
@@ -10,5 +10,5 @@
           <ion-icon *ngFor="let photo of getStars(photo.rating).starOut" name="star-outline"></ion-icon>
         </div>
       </div>
-     <app-comments [photo]="photo" [comments]="photo.comments"></app-comments>
+     <app-comments [comments]="photo.comments"></app-comments>
 </ion-card>

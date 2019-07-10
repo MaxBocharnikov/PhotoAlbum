@@ -9,19 +9,19 @@ import { commentsTrigger } from '../../animations/comments.animation';
     animations: [commentsTrigger]
 })
 export class PhotoComponent implements OnInit {
-  @Input('photoList') photos: [Photo];
+  @Input() photo: Photo;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-    getStars(rating: number): {} {
-        const STARS_AMOUNT = 5;
-        return {
-            star: new Array(rating),
-            starOut: new Array(STARS_AMOUNT - rating)
-        };
-    }
+  getStars(rating: number): {} {
+      const STARS_AMOUNT = 5;
+      return {
+          star: new Array(rating),
+          starOut: new Array(STARS_AMOUNT - rating)
+      };
+  }
 
 }

@@ -3,13 +3,12 @@
     <ion-title>Photo Album</ion-title>
     <div class="sort-controls">
       <div>
-        <ion-label (click)="changeSortType('new')">New First
+        <ion-label style="display: block" (click)="changeSortType('new')">New First
           <ion-icon name="radio-button-{{sorting.newerNameLabel}}"></ion-icon>
         </ion-label>
-
       </div>
       <div>
-        <ion-label (click)="changeSortType('popular')">Popular First
+        <ion-label style="display: block" (click)="changeSortType('popular')">Popular First
           <ion-icon name="radio-button-{{sorting.popularNameLabel}}"></ion-icon>
         </ion-label>
       </div>
@@ -22,7 +21,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ng-container *ngIf="!loadError; else error">
-    <app-photo [photoList]="photos | photoSort: sorting.sortBy"></app-photo>
+    <app-photo *ngFor="let photo of photos | photoSort: sorting.sortBy" [photo]="photo"></app-photo>
   </ng-container>
   <ng-template #error>
     <p>Failed to Load</p>

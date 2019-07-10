@@ -17,29 +17,45 @@ export class AllphotosPage implements OnInit {
       popularNameLabel: 'off'
   };
 
-  loading = null;
+  loading: boolean;
 
   constructor(private photosService: PhotosService, public alertController: AlertController, public loadingController: LoadingController) {
   }
 
   ngOnInit() {
-      this.showLoader();
       this.photosService.getAllPhotos().subscribe((data: Photo) => {
-              this.photos = data;
-              setTimeout(() => {
-                  this.loading.dismiss();
-              }, 1500);
-              //this.loading.dismiss();  // Без таймаута ошибка!!!
+              this.setDataOnSuccess(data);
           },
           (error) => {
-              this.loadError = true;
-              setTimeout(() => {
-                  this.loading.dismiss();
-              }, 1500);
-              this.presentAlert();
+              this.setDataOnError();
           }
       );
   }
+
+    doRefresh(event) {
+      this.photosService.getAllPhotos().subscribe((data: Photo) => {  // Повторение кода в ngOnInit. Необоходимо продумать структуру.
+              this.setDataOnSuccess(data);
+              setTimeout(() => {
+                  event.target.complete();
+              }, 500);
+            },
+            (error) => {
+                this.setDataOnError();
+                setTimeout(() => {
+                    event.target.complete();
+                }, 500);
+            }
+        );
+    }
+
+    setDataOnSuccess(data: Photo) {
+        this.photos = data;
+    }
+
+    setDataOnError() {
+        this.loadError = true;
+        this.presentAlert();
+    }
 
     async presentAlert() {
         const alert = await this.alertController.create({
@@ -62,27 +78,11 @@ export class AllphotosPage implements OnInit {
       }
     }
 
-    async showLoader() {
+   /* async showLoader() {
         this.loading = await this.loadingController.create({
             message: 'Loading...'
         });
         return await this.loading.present();
-    }
+    }*/
 
-    doRefresh(event) {
-        this.photosService.getAllPhotos().subscribe((data: Photo) => {  // Повторение кода в ngOnInit. Необоходимо продумать структуру.
-                this.photos = data;
-                setTimeout(() => {
-                    event.target.complete();
-                }, 1500);
-            },
-            (error) => {
-                this.loadError = true;
-                setTimeout(() => {
-                    event.target.complete();
-                }, 1500);
-
-            }
-        );
-    }
 }
