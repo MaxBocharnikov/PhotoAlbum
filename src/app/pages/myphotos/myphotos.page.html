@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>myphotos</ion-title>
+    <ion-title>My Photos</ion-title>
+    <div class="add_photo"><ion-icon name="camera" style="zoom: 1.5"></ion-icon></div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <app-photo *ngFor="let photo of userPhotos" [photo]="photo"></app-photo>
+  <app-photo *ngFor="let photo of userPhotos" [photo]="photo" [profileMod]="true"></app-photo>
 </ion-content>

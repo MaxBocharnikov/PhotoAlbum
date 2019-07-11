@@ -1,0 +1,10 @@
+@import '../../variables.scss';
+.add_photo {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  ion-icon {
+    stroke: $icon-color;
+    fill: $icon-color;
+  }
+}

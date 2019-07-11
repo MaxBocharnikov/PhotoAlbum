@@ -1,9 +1,13 @@
+@import '../../../variables.scss';
+
 .photo {
   padding: 5px;
 }
 .photo__info {
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
+
+  margin-bottom: 15px;
 }
 
 .photo__author {
@@ -11,6 +15,11 @@
   margin-bottom: 5px;
   font-weight: 600;
   color: #262626;
+}
+
+ion-card-title {
+  display: flex;
+  justify-content: space-between;
 }
 
 .photo__title {
@@ -24,12 +33,33 @@
   object-position: 7%;
 }
 
-.photo__date {
+.photo__date, .photo__update-date {
   font-style: italic;
 }
 
 .photo__rating ion-icon {
-  stroke: #3880ff;
-  fill: #3880ff;
+  stroke: $icon-color;
+  fill: $icon-color;
 }
 
+.photo__additional {
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo__feedback {
+  display: flex;
+}
+
+.photo-views {
+  margin-right: 10px;
+}
+
+.photo__feedback ion-icon {
+  margin-right: 5px;
+}
+
+.photo__controls {
+  color: $icon-color;
+  font-weight: 900;
+}

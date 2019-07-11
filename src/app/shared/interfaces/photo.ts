@@ -6,6 +6,9 @@ export class Photo {
     img: string;
     text: string;
     date: string;
+    updateDate: string;
+    views: number;
+    likes: number;
     rating: number;
-    comments: [];
-};
+    comments: [{}];
+}

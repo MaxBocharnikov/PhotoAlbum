@@ -1,13 +1,23 @@
 <ion-card class="photo">
-    <ion-label class="photo__author">{{photo.authorName}}</ion-label>
+    <ion-label *ngIf="!profileMod" class="photo__author">{{photo.authorName}}</ion-label>
       <ion-img  class="photo__img" [src]="photo.img"></ion-img>
-      <ion-card-title class="photo__title">{{photo.title}}</ion-card-title>
+      <ion-card-title>
+        <div class="photo__title">{{photo.title}}</div>
+        <span *ngIf="profileMod" class="photo__controls" (click)="showActions()">...</span>
+      </ion-card-title>
       <p class="photo__text">{{photo.text}}</p>
       <div class="photo__info">
         <ion-label class="photo__date">Added {{photo.date | date: 'short'}}</ion-label>
         <div class="photo__rating">
           <ion-icon *ngFor="let photo of getStars(photo.rating).star" name="star"></ion-icon>
           <ion-icon *ngFor="let photo of getStars(photo.rating).starOut" name="star-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="photo__additional" *ngIf="profileMod">
+        <div class="photo__update-date">Updated {{photo.updateDate | date: 'short'}}</div>
+        <div class="photo__feedback">
+          <div class="photo-views"><ion-icon name="eye"></ion-icon> <ion-label>{{photo.views}}</ion-label></div>
+          <div class="photo-likes"><ion-icon name="heart-empty"></ion-icon><ion-label>{{photo.likes}}</ion-label></div>
         </div>
       </div>
      <app-comments [comments]="photo.comments"></app-comments>
