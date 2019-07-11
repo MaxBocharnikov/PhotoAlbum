@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import { PhotosService } from '../../shared/services/photos.service';
 import { Photo } from '../../shared/interfaces/photo';
+import {ModalController} from '@ionic/angular';
+import { PhotouploadPage } from '../photoupload/photoupload.page';
 
 @Component({
   selector: 'app-myphotos',
@@ -12,7 +14,7 @@ export class MyphotosPage implements OnInit {
 
   private user: { id: number};
   private userPhotos: Photo;
-  constructor(private userService: UserService, private photoService: PhotosService) { }
+  constructor(private userService: UserService, private photoService: PhotosService, private modalController: ModalController) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();
@@ -24,5 +26,10 @@ export class MyphotosPage implements OnInit {
           }
       );
   }
-
+ async addPhoto() {
+      const modal = await this.modalController.create({
+          component: PhotouploadPage
+      });
+      return await modal.present();
+  }
 }

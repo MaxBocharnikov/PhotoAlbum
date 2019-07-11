@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 import { MyphotosPage } from './myphotos.page';
 import {ComponentsModule} from '../../shared/components/components.module';
+import {PhotouploadPage} from '../photoupload/photoupload.page';
 
 const routes: Routes = [
   {
@@ -17,11 +18,12 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+      ReactiveFormsModule,
     IonicModule,
       ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MyphotosPage, /*PhotoComponent, CommentsComponent*/]
+  declarations: [MyphotosPage, PhotouploadPage],
+    entryComponents: [PhotouploadPage]
 })
 export class MyphotosPageModule {}

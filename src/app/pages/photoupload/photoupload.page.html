@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Upload Photo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form__group">
+      <ion-label>Choose File
+        <ion-input type="file" formControlName="file" (change)="onFileChange($event)"></ion-input>
+      </ion-label>
+    </div>
+    <div *ngIf="form.get('file').invalid && form.get('file').touched">
+      <span *ngIf="form.get('file').errors['required']" class="form__error">Choose File</span>
+      <span *ngIf="form.get('file').errors['typeError']" class="form__error">Invalid file type</span>
+    </div>
+    <div class="form__group">
+      <ion-label>Photo Title
+        <ion-input formControlName="title"></ion-input>
+      </ion-label>
+    </div>
+    <div *ngIf="form.get('title').invalid && form.get('title').touched">
+      <span *ngIf="form.get('title').errors['required']" class="form__error">Enter Title</span>
+      <span *ngIf="form.get('title').errors['lengthError']" class="form__error">Max 50 characters</span>
+    </div>
+    <div class="form__group">
+      <ion-label>Photo Description
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-label>
+    </div>
+    <ion-button [disabled]="form.invalid"  class="form__submit" type="submit">Add Photo</ion-button>
+  </form>
+</ion-content>
