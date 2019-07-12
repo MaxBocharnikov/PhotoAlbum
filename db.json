@@ -93,6 +93,20 @@
       "likes": 25,
       "rating": 4,
       "comments": []
+    },
+    {
+      "id": 5,
+      "authorId": 1,
+      "authorName": "Max Bocharnikov",
+      "title": "Test",
+      "img": "https://rockandresole.com/wp-content/uploads/2017/04/58832_300x300.jpg",
+      "text": "123",
+      "date": "2019-07-12T09:27:32.583Z",
+      "updateDate": "2019-07-12T09:27:32.583Z",
+      "views": 0,
+      "likes": 0,
+      "rating": 0,
+      "comments": []
     }
   ]
 }

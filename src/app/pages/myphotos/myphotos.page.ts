@@ -13,7 +13,7 @@ import { PhotouploadPage } from '../photoupload/photoupload.page';
 export class MyphotosPage implements OnInit {
 
   private user: { id: number};
-  private userPhotos: [Photo];
+  private userPhotos: Photo[];
   constructor(private userService: UserService, private photoService: PhotosService, private modalController: ModalController, private alertController: AlertController, private appRef: ApplicationRef) { }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class MyphotosPage implements OnInit {
   }
 
   getData() {
-      this.photoService.getUserPhotos(this.user.id).subscribe((data: [Photo]) => {
+      this.photoService.getUserPhotos(this.user.id).subscribe((data: Photo[]) => {
               this.userPhotos = data;
           },
           (error) => {

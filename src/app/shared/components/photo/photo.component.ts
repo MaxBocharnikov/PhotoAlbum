@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Photo} from '../../interfaces/photo';
 import { commentsTrigger } from '../../animations/comments.animation';
-import {ActionSheetController, AlertController} from '@ionic/angular';
+import {ActionSheetController, AlertController, ModalController} from '@ionic/angular';
 import {PhotosService} from '../../services/photos.service';
+import {PhotouploadPage} from '../../../pages/photoupload/photoupload.page';
 
 @Component({
   selector: 'app-photo',
@@ -14,7 +15,7 @@ export class PhotoComponent implements OnInit {
   @Input() photo: Photo;
   @Input() profileMod = false;
   @Output() onDelete = new EventEmitter<number>();
-  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService,  private alertController: AlertController) { }
+  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService,  private alertController: AlertController, private modalController: ModalController) { }
 
   ngOnInit() {
   }
@@ -35,7 +36,7 @@ export class PhotoComponent implements OnInit {
               text: 'Edit',
               icon: 'create',
               handler: () => {
-                  console.log('Share clicked');
+                  this.editPhoto();
               }
           }, {
               text: 'Delete',
@@ -69,7 +70,7 @@ export class PhotoComponent implements OnInit {
 
       await alert.present();
   }
-    async presentAlertConfirm() {
+  async presentAlertConfirm() {
       const alert = await this.alertController.create({
           header: 'Deleting confirm!',
           message: 'Are you sure you wanna delete this photo?',
@@ -78,13 +79,24 @@ export class PhotoComponent implements OnInit {
                   text: 'Cancel',
                   role: 'cancel'
               }, {
-                  text: 'Okay',
-                  handler: () => {
-                      this.deletePhoto(this.photo.id);
-                  }
-              }
-          ]
-      });
+              text: 'Okay',
+                handler: () => {
+                  this.deletePhoto(this.photo.id);
+                 }
+          }
+         ]
+     });
       await alert.present();
     }
+    async editPhoto() {
+      const modal = await this.modalController.create({
+          component: PhotouploadPage,
+          componentProps: {
+              id: this.photo.id,
+              title: this.photo.title,
+              description: this.photo.text
+          }
+      });
+      return await modal.present();
+  }
 }
