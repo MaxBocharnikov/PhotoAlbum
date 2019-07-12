@@ -9,12 +9,12 @@
 <ion-content>
   <div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form__group">
+      <div *ngIf="!photo" class="form__group">
         <ion-label>Choose File
           <ion-input type="file" formControlName="file" (change)="onFileChange($event)"></ion-input>
         </ion-label>
       </div>
-      <div *ngIf="form.get('file').invalid && form.get('file').touched">
+      <div *ngIf="!photo && form.get('file').invalid && form.get('file').touched">
         <span *ngIf="form.get('file').errors['required']" class="form__error">Choose File</span>
         <span *ngIf="form.get('file').errors['typeError']" class="form__error">Invalid file type</span>
       </div>

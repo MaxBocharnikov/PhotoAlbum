@@ -22,6 +22,10 @@ export class PhotosService {
     return this.http.post(this.url, photo);
   }
 
+  editUserPhoto(photo: Photo) {
+    return this.http.put(`${this.url}/${photo.id}`, photo);
+  }
+
   deleteUserPhoto(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }

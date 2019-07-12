@@ -13,30 +13,32 @@ import {Photo} from '../../shared/interfaces/photo';
 export class PhotouploadPage implements OnInit {
   form: FormGroup;
   selectFile: File;
-  withParams = false;
-  buttonText = 'Add Photo';
-  @Input('id') id = '';
-  @Input('title') title = '';
-  @Input('description') description;
+  buttonText: string;
+  @Input('photo') photo: Photo = null;
   constructor(private modalController: ModalController, private userService: UserService, private photoService: PhotosService, private alertController: AlertController) {}
 
   ngOnInit() {
-    this.form = new FormGroup({
-        file: new FormControl('', [Validators.required, this.checkFile]),
-        title: new FormControl(`${this.id}`, [Validators.required, this.checkForLength]),
-        description: new FormControl(`${this.title}`)
-    });
-    if (this.id) {
-        this.withParams = true;
-        this.buttonText = 'Edit Photo';
-    }
+      if (!this.photo) {
+          this.form = new FormGroup({
+              file: new FormControl('', [Validators.required, this.checkFile]),
+              title: new FormControl('', [Validators.required, this.checkForLength]),
+              description: new FormControl('')
+          });
+          this.buttonText = 'Add Photo';
+      } else {
+          this.form = new FormGroup({
+              title: new FormControl(this.photo.title, [Validators.required, this.checkForLength]),
+              description: new FormControl(this.photo.text)
+          });
+          this.buttonText = 'Edit Photo';
+      }
   }
   dismissModal() {
    this.modalController.dismiss();
   }
 
   onSubmit() {
-    if (!this.withParams) {
+    if (!this.photo) {
         this.addPhoto();
     } else {
        this.editPhoto();
@@ -72,7 +74,16 @@ export class PhotouploadPage implements OnInit {
 
     editPhoto() {
       const formValue = this.form.value;
-      alert('hey');
+      this.photo.title = formValue.title;
+      this.photo.text = formValue.description;
+      this.photo.updateDate = new Date().toJSON();
+      this.photoService.editUserPhoto(this.photo).subscribe((added: Photo) => {
+              this.modalController.dismiss(this.photo);
+              },
+          () => {
+              this.presentAlert();
+          }
+      );
     }
 
     async presentAlert() {

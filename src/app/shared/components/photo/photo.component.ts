@@ -92,11 +92,16 @@ export class PhotoComponent implements OnInit {
       const modal = await this.modalController.create({
           component: PhotouploadPage,
           componentProps: {
-              id: this.photo.id,
-              title: this.photo.title,
-              description: this.photo.text
+              photo: this.photo
           }
       });
+      modal.onDidDismiss()
+          .then((data) => {
+              const photo = data.data;
+              if (typeof photo !== 'undefined') {
+                  this.photo = photo;
+              }
+          });
       return await modal.present();
   }
 }
