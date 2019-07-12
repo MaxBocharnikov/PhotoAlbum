@@ -10,5 +10,5 @@ export class Photo {
     views: number;
     likes: number;
     rating: number;
-    comments: [{}];
+    comments: [];
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {filter, map} from "rxjs/internal/operators";
+import {Photo} from '../interfaces/photo';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +16,13 @@ export class PhotosService {
 
   getUserPhotos(id: number) {
     return this.http.get(`${this.url}?authorId=${id}`);
+  }
+
+  addUserPhoto(photo: Photo) {
+    return this.http.post(this.url, photo);
+  }
+
+  deleteUserPhoto(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
   }
 }

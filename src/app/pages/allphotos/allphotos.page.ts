@@ -9,7 +9,7 @@ import {AlertController, LoadingController} from '@ionic/angular';
 })
 export class AllphotosPage implements OnInit {
 
-  photos: Photo;
+  photos: [Photo];
   loadError = false;
   sorting = {
       sortBy: 'new',
@@ -19,11 +19,11 @@ export class AllphotosPage implements OnInit {
 
   loading: boolean;
 
-  constructor(private photosService: PhotosService, public alertController: AlertController, public loadingController: LoadingController) {
+  constructor(private photosService: PhotosService, private alertController: AlertController, private loadingController: LoadingController) {
   }
 
   ngOnInit() {
-      this.photosService.getAllPhotos().subscribe((data: Photo) => {
+      this.photosService.getAllPhotos().subscribe((data: [Photo]) => {
               this.setDataOnSuccess(data);
           },
           (error) => {
@@ -33,7 +33,7 @@ export class AllphotosPage implements OnInit {
   }
 
     doRefresh(event) {
-      this.photosService.getAllPhotos().subscribe((data: Photo) => {  // Повторение кода в ngOnInit. Необоходимо продумать структуру.
+      this.photosService.getAllPhotos().subscribe((data: [Photo]) => {  // Повторение кода в ngOnInit. Необоходимо продумать структуру.
               this.setDataOnSuccess(data);
               setTimeout(() => {
                   event.target.complete();
@@ -48,7 +48,7 @@ export class AllphotosPage implements OnInit {
         );
     }
 
-    setDataOnSuccess(data: Photo) {
+    setDataOnSuccess(data: [Photo]) {
         this.photos = data;
     }
 
