@@ -6,9 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AllphotosPage } from './allphotos.page';
-import {PhotoSortPipe} from '../../shared/pipes/photo-sort.pipe';
-import {ComponentsModule} from '../../shared/components/components.module';
-
+import {SharedModule} from '../../shared/components/shared.module';
 const routes: Routes = [
   {
     path: '',
@@ -21,9 +19,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-      ComponentsModule,
+      SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AllphotosPage, PhotoSortPipe, /*PhotoComponent, CommentsComponent*/]
+  declarations: [AllphotosPage]
 })
 export class AllphotosPageModule {}

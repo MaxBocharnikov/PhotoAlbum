@@ -49,7 +49,7 @@ export class PhotouploadPage implements OnInit {
       const formValue = this.form.value;
       this.photoService.getAllPhotos().subscribe((resp: [Photo]) => {
           const data: Photo = {
-              id: resp.length + 1,
+              id: resp[resp.length - 1].id + 1,
               authorId: this.userService.getUser().id,
               authorName: this.userService.getUser().name,
               title: formValue.title,

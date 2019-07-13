@@ -1,0 +1,13 @@
+@import '../../../variables.scss';
+.sort-controls {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sort-group {
+  display: flex;
+
+  ion-label {
+    margin-right: 5px;
+  }
+}

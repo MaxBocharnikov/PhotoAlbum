@@ -1,10 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>My Photos</ion-title>
-    <div (click)="addPhoto()" class="add_photo"><ion-icon name="camera" style="zoom: 1.5"></ion-icon></div>
+    <h2 class="toolbar-title">My Photos</h2>
+    <div (click)="addPhoto()" class="add_photo"><ion-icon name="camera" style="zoom: 2.0"></ion-icon></div>
+    <app-sort (onchangeSortType)="changeSort($event)" [profileMod]="true"></app-sort>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <app-photo *ngFor="let photo of userPhotos" (onDelete)="onDeleteEvent($event)" [photo]="photo" [profileMod]="true"></app-photo>
+  <app-photo *ngFor="let photo of userPhotos | photoSort: sortType" (onDelete)="onDeleteEvent($event)" [photo]="photo" [profileMod]="true"></app-photo>
 </ion-content>

@@ -1,0 +1,18 @@
+<ion-radio-group class="sort-controls">
+  <div class="sort-group" (click)="changeSortType('new')">
+    <ion-label style="display: block">New</ion-label>
+    <ion-radio mode="md" checked  value="new"></ion-radio>
+  </div>
+  <div class="sort-group" (click)="changeSortType('popular')">
+    <ion-label style="display: block">Popular</ion-label>
+    <ion-radio mode="md"  value="popular"></ion-radio>
+  </div>
+  <div *ngIf="profileMod" class="sort-group" (click)="changeSortType('alphabet')">
+    <ion-label style="display: block">Alphabet</ion-label>
+    <ion-radio mode="md" checked  value="alphabet"></ion-radio>
+  </div>
+  <div *ngIf="profileMod" class="sort-group" (click)="changeSortType('favorite')">
+    <ion-label style="display: block">Favorite</ion-label>
+    <ion-radio mode="md"  value="favorite"></ion-radio>
+  </div>
+</ion-radio-group>

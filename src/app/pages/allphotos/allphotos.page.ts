@@ -11,13 +11,7 @@ export class AllphotosPage implements OnInit {
 
   photos: [Photo];
   loadError = false;
-  sorting = {
-      sortBy: 'new',
-      newerNameLabel: 'on',
-      popularNameLabel: 'off'
-  };
-
-  loading: boolean;
+  sortType = 'new';
 
   constructor(private photosService: PhotosService, private alertController: AlertController, private loadingController: LoadingController) {
   }
@@ -67,15 +61,8 @@ export class AllphotosPage implements OnInit {
         await alert.present();
     }
 
-    changeSortType(type: string) {
-      this.sorting.sortBy = type;
-      if (this.sorting.newerNameLabel === 'on') {
-          this.sorting.newerNameLabel = 'off';
-          this.sorting.popularNameLabel = 'on';
-      } else {
-          this.sorting.newerNameLabel = 'on';
-          this.sorting.popularNameLabel = 'off';
-      }
+    changeSort(type: string) {
+      this.sortType = type;
     }
 
    /* async showLoader() {

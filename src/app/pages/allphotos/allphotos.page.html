@@ -1,18 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Photo Album</ion-title>
-    <div class="sort-controls">
-      <div>
-        <ion-label style="display: block" (click)="changeSortType('new')">New First
-          <ion-icon name="radio-button-{{sorting.newerNameLabel}}"></ion-icon>
-        </ion-label>
-      </div>
-      <div>
-        <ion-label style="display: block" (click)="changeSortType('popular')">Popular First
-          <ion-icon name="radio-button-{{sorting.popularNameLabel}}"></ion-icon>
-        </ion-label>
-      </div>
-    </div>
+    <h2 class="toolbar-title">Photo Album</h2>
+    <app-sort (onchangeSortType)="changeSort($event)"></app-sort>
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +10,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ng-container *ngIf="!loadError; else error">
-    <app-photo *ngFor="let photo of photos | photoSort: sorting.sortBy" [photo]="photo"></app-photo>
+    <app-photo *ngFor="let photo of photos | photoSort: sortType" [photo]="photo"></app-photo>
   </ng-container>
   <ng-template #error>
     <p>Failed to Load</p>
