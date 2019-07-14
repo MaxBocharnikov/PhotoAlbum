@@ -1,13 +1,6 @@
 @import '../../../variables.scss';
-.sort-controls {
-  display: flex;
-  justify-content: space-around;
-}
-
-.sort-group {
-  display: flex;
-
-  ion-label {
-    margin-right: 5px;
-  }
+.sort-select {
+  width: 40%;
+  margin-left: auto;
+  color: $icon-color;
 }

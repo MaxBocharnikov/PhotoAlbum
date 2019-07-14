@@ -9,14 +9,13 @@ export class SortComponent implements OnInit {
   @Output() onchangeSortType = new EventEmitter();
   @Input('profileMod') profileMod = false;
 
-  sortBy = 'new';
+  sortBy = 'New';
   constructor() { }
 
   ngOnInit() {}
 
-  changeSortType(type: string) {
-      this.sortBy = type;
+  onSortChange(event) {
+      this.sortBy = event.target.value;
       this.onchangeSortType.emit(this.sortBy);
   }
-
 }

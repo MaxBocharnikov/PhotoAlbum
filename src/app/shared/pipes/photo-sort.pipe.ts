@@ -10,12 +10,12 @@ export class PhotoSortPipe implements PipeTransform {
   transform(photos: [Photo], type: string): [Photo] {
     if (typeof  photos === 'undefined') { return; }
     switch (type) {
-        case 'popular':
+        case 'Popular':
             return photos.sort((left: any, right: any) => {
                 return right.rating - left.rating;
             });
             break;
-        case 'alphabet':
+        case 'Alphabetical':
             return photos.sort((left: any, right: any) => {
                 const x  = left.title.toLowerCase();
                 const y = right.title.toLowerCase();
@@ -28,7 +28,7 @@ export class PhotoSortPipe implements PipeTransform {
                 return 0;
             });
             break;
-        case 'favorite':
+        case 'Favorite':
             return photos.sort((left: any, right: any) => {
                 return right.likes - left.likes;
             });

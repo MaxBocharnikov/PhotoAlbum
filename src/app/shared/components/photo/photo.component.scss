@@ -38,8 +38,8 @@ ion-card-title {
 }
 
 .photo__rating ion-icon {
-  stroke: $icon-color;
-  fill: $icon-color;
+  stroke: $features-color;
+  fill: $features-color;
 }
 
 .photo__additional {
@@ -60,6 +60,6 @@ ion-card-title {
 }
 
 .photo__controls {
-  color: $icon-color;
+  color: $features-color;
   font-weight: 900;
 }

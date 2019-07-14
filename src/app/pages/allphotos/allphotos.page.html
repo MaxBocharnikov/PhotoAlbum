@@ -1,7 +1,9 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <h2 class="toolbar-title">Photo Album</h2>
-    <app-sort (onchangeSortType)="changeSort($event)"></app-sort>
+    <div class="toolbar__content">
+      <app-sort (onchangeSortType)="changeSort($event)"></app-sort>
+    </div>
   </ion-toolbar>
 </ion-header>
 

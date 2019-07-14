@@ -1,8 +1,10 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <h2 class="toolbar-title">My Photos</h2>
-    <div (click)="addPhoto()" class="add_photo"><ion-icon name="camera" style="zoom: 2.0"></ion-icon></div>
-    <app-sort (onchangeSortType)="changeSort($event)" [profileMod]="true"></app-sort>
+    <div class="toolbar__content" style="">
+      <div (click)="addPhoto()" class="add_photo"><ion-icon name="camera" style="zoom: 2.0"></ion-icon></div>
+      <app-sort class="toolbar__content__sort" (onchangeSortType)="changeSort($event)" [profileMod]="true"></app-sort>
+    </div>
   </ion-toolbar>
 </ion-header>
 
