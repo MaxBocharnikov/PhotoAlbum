@@ -1,14 +1,10 @@
 export class Photo {
     id: number;
-    authorId: number;
-    authorName: string;
+    imageUrl: string;
     title: string;
-    img: string;
-    text: string;
-    date: string;
-    updateDate: string;
-    views: number;
-    likes: number;
-    rating: number;
-    comments: [];
+    description: string;
+    author_id: number;
+    uploadDate: string;
+    editDate: string;
+    commonRating: number;
 }

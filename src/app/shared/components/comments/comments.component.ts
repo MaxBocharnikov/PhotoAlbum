@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {commentsTrigger} from '../../animations/comments.animation';
-import {Photo} from '../../interfaces/photo';
+import {CommentsService} from '../../services/comments.service';
 
 @Component({
   selector: 'app-comments',
@@ -9,12 +9,18 @@ import {Photo} from '../../interfaces/photo';
     animations: [commentsTrigger]
 })
 export class CommentsComponent implements OnInit {
-  @Input() comments: {};
+  @Input() photoId: number;
   isCommentsShow = false;
+  comments: [Comment];
+  length = 0;
+  constructor(private commentService: CommentsService) { }
 
-  constructor() { }
-
-  ngOnInit() {}
+  ngOnInit() {
+      this.commentService.getCommentsByPhotoId(this.photoId).subscribe((data) => {
+          this.comments = data.comments;
+          this.length = this.comments.length;
+      })
+  }
 
   toggleComments(event) {
       const comments = event.target.attributes.comments.value;

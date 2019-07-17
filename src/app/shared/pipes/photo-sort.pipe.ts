@@ -12,7 +12,7 @@ export class PhotoSortPipe implements PipeTransform {
     switch (type) {
         case 'Popular':
             return photos.sort((left: any, right: any) => {
-                return right.rating - left.rating;
+                return right.commonRating - left.commonRating;
             });
             break;
         case 'Alphabetical':
@@ -30,12 +30,12 @@ export class PhotoSortPipe implements PipeTransform {
             break;
         case 'Favorite':
             return photos.sort((left: any, right: any) => {
-                return right.likes - left.likes;
+                return right.commonRating - left.commonRating;
             });
             break;
         default:
         return photos.sort((left: any, right: any) =>  {
-          return +new Date(right.date) - +new Date(left.date);
+          return +new Date(right.uploadDate) - +new Date(left.uploadDate);
         });
         break;
     }

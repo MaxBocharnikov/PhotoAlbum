@@ -1,7 +1,9 @@
 export class Comment {
     id: number;
-    authorId: number;
-    authorName: string;
-    text: string;
+    author_id: number;
+    user: string;
     date: string;
+    edited: string;
+    text: string;
+    postId: number;
 };

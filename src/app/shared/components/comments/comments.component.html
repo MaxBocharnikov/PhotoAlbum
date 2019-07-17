@@ -1,7 +1,7 @@
-<ion-button class="photo__button" (click)="toggleComments($event)" expand="block" [disabled]="!comments.length" [attr.checked]="0" [attr.comments]="comments.length">Show Comments ({{comments.length}})</ion-button>
+<ion-button class="photo__button" (click)="toggleComments($event)" expand="block" [disabled]="!length" [attr.checked]="0" [attr.comments]="length">Show Comments ({{length}})</ion-button>
 <div [@commentsTrigger]="'show'" *ngIf="isCommentsShow" class="comments__list">
   <div padding class="comments__item" *ngFor="let comment of comments">
-    <div class="comments__author"><ion-label>{{comment.authorName}}</ion-label></div>
+    <div class="comments__author"><ion-label>{{comment.user}}</ion-label></div>
     <div class="comments__text">{{comment.text}}</div>
     <div class="comments__date"><ion-label>{{comment.date | date: 'short'}}</ion-label></div>
   </div>

@@ -28,7 +28,7 @@ export class PhotouploadPage implements OnInit {
       } else {
           this.form = new FormGroup({
               title: new FormControl(this.photo.title, [Validators.required, this.checkForLength]),
-              description: new FormControl(this.photo.text)
+              description: new FormControl(this.photo.description)
           });
           this.buttonText = 'Edit Photo';
       }
@@ -75,8 +75,8 @@ export class PhotouploadPage implements OnInit {
     editPhoto() {
       const formValue = this.form.value;
       this.photo.title = formValue.title;
-      this.photo.text = formValue.description;
-      this.photo.updateDate = new Date().toJSON();
+      this.photo.description = formValue.description;
+      this.photo.uploadDate = new Date().toJSON();
       this.photoService.editUserPhoto(this.photo).subscribe((added: Photo) => {
               this.modalController.dismiss(this.photo);
               },

@@ -15,6 +15,7 @@ export class PhotoComponent implements OnInit {
   @Input() photo: Photo;
   @Input() profileMod = false;
   @Output() onDelete = new EventEmitter<number>();
+  serverUrl = 'http://localhost:3000/';
   constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService,  private alertController: AlertController, private modalController: ModalController) { }
 
   ngOnInit() {

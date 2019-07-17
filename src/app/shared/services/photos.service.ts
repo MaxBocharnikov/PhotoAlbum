@@ -11,7 +11,7 @@ export class PhotosService {
   constructor(private http: HttpClient) { }
 
   getAllPhotos() {
-        return this.http.get(this.url);
+        return this.http.get(this.url + '/getAllPhotos');
   }
 
   getUserPhotos(id: number) {
