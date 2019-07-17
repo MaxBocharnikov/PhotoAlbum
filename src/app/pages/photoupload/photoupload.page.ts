@@ -47,29 +47,19 @@ export class PhotouploadPage implements OnInit {
 
   addPhoto() {
       const formValue = this.form.value;
-      this.photoService.getAllPhotos().subscribe((resp: [Photo]) => {
-          const data: Photo = {
-              id: resp[resp.length - 1].id + 1,
-              authorId: this.userService.getUser().id,
-              authorName: this.userService.getUser().name,
-              title: formValue.title,
-              img: 'https://rockandresole.com/wp-content/uploads/2017/04/58832_300x300.jpg',
-              text: formValue.description,
-              date: new Date().toJSON(),
-              updateDate: new Date().toJSON(),
-              views: 0,
-              likes: 0,
-              rating: 0,
-              comments: []
-          };
-          this.photoService.addUserPhoto(data).subscribe((added: Photo) => {
-                  this.modalController.dismiss(data);
-              },
-              () => {
-                  this.presentAlert();
-              }
-          );
-      }); // Временное решение для получения уникального ID; Удалить получения списка фоток после добавления БЭКА
+      /*const data: Photo = {
+          file: formValue.file,
+          title: formValue.title,
+          description: formValue.description
+      };*/
+
+      this.photoService.addUserPhoto(formValue).subscribe((added: Photo) => {
+              this.modalController.dismiss(formValue);
+          },
+          () => {
+              this.presentAlert();
+          }
+      );
   }
 
     editPhoto() {
@@ -119,8 +109,8 @@ export class PhotouploadPage implements OnInit {
   }
 
   onFileChange(event) {
-    this.selectFile = event.target.files[0];
-    console.log(this.selectFile);
+    let file  = event.target.files[0];
+    this.form.controls['file'].setValue(file ? file.name : '');
   }
 
 }

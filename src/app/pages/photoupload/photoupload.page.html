@@ -8,10 +8,10 @@
 </ion-header>
 <ion-content>
   <div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form method="post" action="" [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
       <div *ngIf="!photo" class="form__group">
         <ion-label>Choose File
-          <ion-input type="file" formControlName="file" (change)="onFileChange($event)"></ion-input>
+          <ion-input #file type="file" formControlName="file" (change)="onFileChange($event)"></ion-input>
         </ion-label>
       </div>
       <div *ngIf="!photo && form.get('file').invalid && form.get('file').touched">
@@ -20,7 +20,7 @@
       </div>
       <div class="form__group">
         <ion-label>Photo Title
-          <ion-input formControlName="title"></ion-input>
+          <ion-input name="title" formControlName="title"></ion-input>
         </ion-label>
       </div>
       <div *ngIf="form.get('title').invalid && form.get('title').touched">
@@ -29,7 +29,7 @@
       </div>
       <div class="form__group">
         <ion-label>Photo Description
-          <ion-textarea formControlName="description"></ion-textarea>
+          <ion-textarea name="description" formControlName="description"></ion-textarea>
         </ion-label>
       </div>
       <ion-button [disabled]="form.invalid"  class="form__submit" type="submit">{{buttonText}}</ion-button>

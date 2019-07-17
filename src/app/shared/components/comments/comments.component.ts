@@ -17,7 +17,7 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit() {
       this.commentService.getCommentsByPhotoId(this.photoId).subscribe((data) => {
-          this.comments = data.comments;
+          this.comments = data;
           this.length = this.comments.length;
       })
   }

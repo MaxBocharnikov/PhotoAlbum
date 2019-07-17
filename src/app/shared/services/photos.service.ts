@@ -15,11 +15,16 @@ export class PhotosService {
   }
 
   getUserPhotos(id: number) {
-    return this.http.get(`${this.url}?authorId=${id}`);
+    return this.http.get(this.url + '/getUserPhotos');
   }
 
   addUserPhoto(photo: Photo) {
-    return this.http.post(this.url, photo);
+    const headers = new Headers({
+            'Content-type': 'multipart/form-data'
+    });
+    return this.http.post(this.url, photo, {
+      headers: headers
+    });
   }
 
   editUserPhoto(photo: Photo) {
