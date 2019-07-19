@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {AlertController, ModalController} from '@ionic/angular';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../shared/services/user.service';
@@ -12,9 +12,10 @@ import {Photo} from '../../shared/interfaces/photo';
 })
 export class PhotouploadPage implements OnInit {
   form: FormGroup;
-  selectFile: File;
   buttonText: string;
+  selectedFile: File;
   @Input('photo') photo: Photo = null;
+  @ViewChild('fileInput') fileInput;
   constructor(private modalController: ModalController, private userService: UserService, private photoService: PhotosService, private alertController: AlertController) {}
 
   ngOnInit() {
@@ -47,14 +48,14 @@ export class PhotouploadPage implements OnInit {
 
   addPhoto() {
       const formValue = this.form.value;
-      /*const data: Photo = {
-          file: formValue.file,
+      const data = {
+          file: this.selectedFile,
           title: formValue.title,
           description: formValue.description
-      };*/
+      };
 
-      this.photoService.addUserPhoto(formValue).subscribe((added: Photo) => {
-              this.modalController.dismiss(formValue);
+      this.photoService.addUserPhoto(data).subscribe((added: Photo) => {
+              this.modalController.dismiss(added);
           },
           () => {
               this.presentAlert();
@@ -64,11 +65,13 @@ export class PhotouploadPage implements OnInit {
 
     editPhoto() {
       const formValue = this.form.value;
-      this.photo.title = formValue.title;
-      this.photo.description = formValue.description;
-      this.photo.uploadDate = new Date().toJSON();
-      this.photoService.editUserPhoto(this.photo).subscribe((added: Photo) => {
-              this.modalController.dismiss(this.photo);
+      const data = {
+          id: this.photo.id,
+          title: formValue.title,
+          description: formValue.description
+        };
+      this.photoService.editUserPhoto(data).subscribe((added: Photo) => {
+              this.modalController.dismiss(added);
               },
           () => {
               this.presentAlert();
@@ -109,8 +112,6 @@ export class PhotouploadPage implements OnInit {
   }
 
   onFileChange(event) {
-    let file  = event.target.files[0];
-    this.form.controls['file'].setValue(file ? file.name : '');
+      this.selectedFile = event.target.files[0];
   }
-
 }

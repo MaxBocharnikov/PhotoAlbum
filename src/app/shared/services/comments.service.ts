@@ -11,6 +11,6 @@ export class CommentsService {
     constructor(private http: HttpClient) { }
 
     getCommentsByPhotoId(photoId) {
-        return this.http.get(this.url + `/getCommentsByPhotoId/${photoId}`).pipe(map((data) => data.comments));
+        return this.http.get(this.url + `/getCommentsByPhotoId/${photoId}`);
     }
 }

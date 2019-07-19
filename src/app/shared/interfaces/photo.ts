@@ -4,7 +4,9 @@ export class Photo {
     title: string;
     description: string;
     author_id: number;
+    user: string;
     uploadDate: string;
     editDate: string;
     commonRating: number;
+    comments: number;
 }

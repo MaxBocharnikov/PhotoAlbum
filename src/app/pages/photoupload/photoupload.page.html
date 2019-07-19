@@ -11,7 +11,7 @@
     <form method="post" action="" [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
       <div *ngIf="!photo" class="form__group">
         <ion-label>Choose File
-          <ion-input #file type="file" formControlName="file" (change)="onFileChange($event)"></ion-input>
+          <ion-input  type="file" formControlName="file" (change)="onFileChange($event)"></ion-input>
         </ion-label>
       </div>
       <div *ngIf="!photo && form.get('file').invalid && form.get('file').touched">

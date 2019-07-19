@@ -18,16 +18,15 @@ export class PhotosService {
     return this.http.get(this.url + '/getUserPhotos');
   }
 
-  addUserPhoto(photo: Photo) {
-    const headers = new Headers({
-            'Content-type': 'multipart/form-data'
-    });
-    return this.http.post(this.url, photo, {
-      headers: headers
-    });
+  addUserPhoto(data) {
+    const form = new FormData();
+    form.append('file', data.file);
+    form.append('title', data.title);
+    form.append('description', data.description);
+    return this.http.post(this.url, form);
   }
 
-  editUserPhoto(photo: Photo) {
+  editUserPhoto(photo) {
     return this.http.put(`${this.url}/${photo.id}`, photo);
   }
 
