@@ -7,12 +7,10 @@ import { IonicModule } from '@ionic/angular';
 import { MyphotosPage } from './myphotos.page';
 import {SharedModule} from '../../shared/components/shared.module';
 import {PhotouploadPage} from '../photoupload/photoupload.page';
+import {CommentsComponent} from '../../shared/components/comments/comments.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: MyphotosPage
-  }
+  { path: '', component: MyphotosPage}
 ];
 
 @NgModule({
@@ -24,6 +22,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [MyphotosPage, PhotouploadPage],
-    entryComponents: [PhotouploadPage]
+    entryComponents: [PhotouploadPage],
+    exports: [RouterModule]
 })
 export class MyphotosPageModule {}

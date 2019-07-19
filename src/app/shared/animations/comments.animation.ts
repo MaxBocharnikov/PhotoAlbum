@@ -9,21 +9,22 @@ import {
 
 export const commentsTrigger = trigger('commentsTrigger', [
     state('show', style({
+        maxHeight: '250px'
     })),
 
     transition('void => show', [
         style({
-            height: 0
+            maxHeight: 0
         }),
 
-        animate(300, style({
-        }))
+        animate(800, style({
+            maxHeight: '250px'
+        })),
+
     ]),
 
-    transition('show => void', [
-        animate(300, style({
-            height: 0
-        }))
-    ])
+    transition('show => void', animate(500, style({
+        maxHeight: 0
+    })))
 
 ]);

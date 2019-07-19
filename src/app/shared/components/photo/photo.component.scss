@@ -63,3 +63,8 @@ ion-card-title {
   color: $features-color;
   font-weight: 900;
 }
+
+app-comments {
+  display: block;
+  overflow-y: scroll;
+}

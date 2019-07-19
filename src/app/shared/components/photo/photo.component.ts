@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Photo} from '../../interfaces/photo';
-import { commentsTrigger } from '../../animations/comments.animation';
 import {ActionSheetController, AlertController, ModalController} from '@ionic/angular';
 import {PhotosService} from '../../services/photos.service';
 import {PhotouploadPage} from '../../../pages/photoupload/photoupload.page';
+import {commentsTrigger} from '../../animations/comments.animation';
 
 @Component({
   selector: 'app-photo',
@@ -16,6 +16,7 @@ export class PhotoComponent implements OnInit {
   @Input() profileMod = false;
   @Output() onDelete = new EventEmitter<number>();
   serverUrl = 'http://localhost:3000/';
+  isCommentsShow = false;
   constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService,  private alertController: AlertController, private modalController: ModalController) { }
 
   ngOnInit() {
@@ -90,7 +91,7 @@ export class PhotoComponent implements OnInit {
       await alert.present();
     }
     async editPhoto() {
-      const modal = await this.modalController.create({
+      const modal = await this.modalController.create(<ModalOptions>{
           component: PhotouploadPage,
           componentProps: {
               photo: this.photo
@@ -105,4 +106,17 @@ export class PhotoComponent implements OnInit {
           });
       return await modal.present();
   }
+
+  toggleComments(event) {
+      if (!+event.target.attributes.checked.value) {
+          event.target.textContent = `Hide Comments (${this.photo.comments})`;
+          event.target.attributes.checked.value = 1;
+          this.isCommentsShow = true;
+
+      } else {
+          event.target.textContent = `Show Comments (${this.photo.comments})`;
+          event.target.attributes.checked.value = 0;
+          this.isCommentsShow = false;
+        }
+    }
 }
