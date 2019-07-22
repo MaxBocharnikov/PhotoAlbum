@@ -68,3 +68,21 @@ app-comments {
   display: block;
   overflow-y: scroll;
 }
+
+
+.upload-comment {
+  display: flex;
+}
+
+.upload-comment__input {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.upload-comment__add {
+  ion-icon {
+    fill: #008000;
+    zoom: 2.0;
+    padding: 5px 0;
+  }
+}

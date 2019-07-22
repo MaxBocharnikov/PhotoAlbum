@@ -9,5 +9,5 @@
 </ion-header>
 
 <ion-content padding>
-  <app-photo *ngFor="let photo of userPhotos | photoSort: sortType" (onDelete)="onDeleteEvent($event)" [photo]="photo" [profileMod]="true"></app-photo>
+  <app-photo *ngFor="let photo of userPhotos | photoSort: sortType" (onCommentUpload)="getData()"  (onDelete)="onDeleteEvent($event)" [photo]="photo" [profileMod]="true"></app-photo>
 </ion-content>

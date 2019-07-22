@@ -17,6 +17,10 @@ export class AllphotosPage implements OnInit {
   }
 
   ngOnInit() {
+      this.getData();
+  }
+
+  getData() {
       this.photosService.getAllPhotos().subscribe((data: [Photo]) => {
               this.setDataOnSuccess(data);
           },

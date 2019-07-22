@@ -13,4 +13,9 @@ export class CommentsService {
     getCommentsByPhotoId(photoId) {
         return this.http.get(this.url + `/getCommentsByPhotoId/${photoId}`);
     }
+
+    addComment(photoId, text) {
+        const body = {postId: photoId, text};
+        return this.http.post(this.url, body);
+    }
 }

@@ -1,23 +1,26 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {Photo} from '../../interfaces/photo';
 import {ActionSheetController, AlertController, ModalController} from '@ionic/angular';
 import {PhotosService} from '../../services/photos.service';
 import {PhotouploadPage} from '../../../pages/photoupload/photoupload.page';
 import {commentsTrigger} from '../../animations/comments.animation';
+import {CommentsService} from "../../services/comments.service";
 
 @Component({
   selector: 'app-photo',
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.scss'],
-    animations: [commentsTrigger]
+    animations: [commentsTrigger],
 })
 export class PhotoComponent implements OnInit {
   @Input() photo: Photo;
   @Input() profileMod = false;
-  @Output() onDelete = new EventEmitter<number>();
+  @Output() onDelete = new EventEmitter<number>()
+  @Output() onCommentUpload = new EventEmitter<boolean>();
   serverUrl = 'http://localhost:3000/';
   isCommentsShow = false;
-  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService,  private alertController: AlertController, private modalController: ModalController) { }
+  commentUpload = '';
+  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService, private commentService: CommentsService,  private alertController: AlertController, private modalController: ModalController) { }
 
   ngOnInit() {
   }
@@ -91,7 +94,7 @@ export class PhotoComponent implements OnInit {
       await alert.present();
     }
     async editPhoto() {
-      const modal = await this.modalController.create(<ModalOptions>{
+      const modal = await this.modalController.create({
           component: PhotouploadPage,
           componentProps: {
               photo: this.photo
@@ -118,5 +121,12 @@ export class PhotoComponent implements OnInit {
           event.target.attributes.checked.value = 0;
           this.isCommentsShow = false;
         }
+    }
+
+
+    uploadComment() {
+      this.commentService.addComment(this.photo.id, this.commentUpload).subscribe((res) => {
+          this.onCommentUpload.emit();
+      })
     }
 }
