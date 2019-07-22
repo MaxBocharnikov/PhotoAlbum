@@ -1,4 +1,7 @@
-import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+    ApplicationRef, Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output,
+    ViewChild
+} from '@angular/core';
 import {Photo} from '../../interfaces/photo';
 import {ActionSheetController, AlertController, ModalController} from '@ionic/angular';
 import {PhotosService} from '../../services/photos.service';
@@ -18,18 +21,19 @@ export class PhotoComponent implements OnInit {
   @Input() photo: Photo;
   @Input() profileMod = false;
   @Output() onDelete = new EventEmitter<number>()
-  @Output() onCommentUpload = new EventEmitter<boolean>();
-  @Output() onCommentDelete = new EventEmitter<boolean>();
   serverUrl = 'http://localhost:3000/';
+  commentsButtonText: string;
   isCommentsShow = false;
   commentUploadText = '';
   commentId = null;
-  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService, private commentService: CommentsService,  private alertController: AlertController, private modalController: ModalController) { }
+  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService, private commentService: CommentsService,  private alertController: AlertController, private modalController: ModalController, private appRef: ApplicationRef) { }
 
-  @ViewChild(CommentsComponent, {static: false})
+  @ViewChild('commentInput') commentInput;
+  @ViewChild(CommentsComponent)
   private commentComponent: CommentsComponent;
 
   ngOnInit() {
+     this.commentsButtonText = `Show Comments (${this.photo.comments})`;
   }
 
 
@@ -117,37 +121,61 @@ export class PhotoComponent implements OnInit {
       return await modal.present();
   }
 
-  toggleComments(event) {
-      if (!+event.target.attributes.checked.value) {
-          event.target.textContent = `Hide Comments (${this.photo.comments})`;
-          event.target.attributes.checked.value = 1;
-          this.isCommentsShow = true;
-
-      } else {
-          event.target.textContent = `Show Comments (${this.photo.comments})`;
-          event.target.attributes.checked.value = 0;
-          this.isCommentsShow = false;
-        }
+  toggleComments() {
+      this.isCommentsShow = !this.isCommentsShow;
+      this.setCommentsButtonText();
     }
 
-    editCommentEvent(event: Comment) {
+    setCommentsButtonText() {
+      this.isCommentsShow ? this.commentsButtonText = `Hide Comments (${this.photo.comments})` : this.commentsButtonText = `Show Comments (${this.photo.comments})`;
+    }
+
+    dicrementCommentCount() {
+      this.photo.comments--;
+      this.setCommentsButtonText();
+    }
+
+    incrementCommentCount() {
+        this.photo.comments++;
+    }
+
+    editCommentButtonClick(event: Comment) {
       this.commentId = event.id;
       this.commentUploadText = event.text;
+      this.commentInput.setFocus();
     }
 
     addComment() {
-        console.log('from add');
-        this.commentService.addComment(this.photo.id, this.commentUploadText).subscribe((res) => {
-            this.onCommentUpload.emit();
+        this.commentService.addComment(this.photo.id, this.commentUploadText).subscribe(() => {
+            this.commentUploadText = '';
+            if (this.isCommentsShow) {
+                this.commentComponent.getData();
+            }
+            this.incrementCommentCount();
+            this.setCommentsButtonText();
+        }, () => {
+            this.presentUploadErrorAlert();
         });
     }
 
     editComment() {
-        console.log('from edit');
-        this.commentService.editComment(this.commentId, this.commentUploadText).subscribe((res) => {
-            this.onCommentUpload.emit();
+        this.commentService.editComment(this.commentId, this.commentUploadText).subscribe(() => {
+            this.commentUploadText = '';
+            this.commentId = null;
+            this.commentComponent.getData();
+        }, () => {
+            this.presentUploadErrorAlert();
         });
-        this.commentId = null;
+    }
+
+    async presentUploadErrorAlert() {
+        const alert = await this.alertController.create({
+            header: 'Error',
+            message: 'Comment was not upload. Try Again',
+            buttons: ['OK']
+        });
+
+        await alert.present();
     }
 
 }
