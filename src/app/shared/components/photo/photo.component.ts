@@ -1,10 +1,12 @@
-import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Photo} from '../../interfaces/photo';
 import {ActionSheetController, AlertController, ModalController} from '@ionic/angular';
 import {PhotosService} from '../../services/photos.service';
 import {PhotouploadPage} from '../../../pages/photoupload/photoupload.page';
 import {commentsTrigger} from '../../animations/comments.animation';
 import {CommentsService} from "../../services/comments.service";
+import {Comment} from "../../interfaces/comment";
+import {CommentsComponent} from "../comments/comments.component";
 
 @Component({
   selector: 'app-photo',
@@ -17,10 +19,15 @@ export class PhotoComponent implements OnInit {
   @Input() profileMod = false;
   @Output() onDelete = new EventEmitter<number>()
   @Output() onCommentUpload = new EventEmitter<boolean>();
+  @Output() onCommentDelete = new EventEmitter<boolean>();
   serverUrl = 'http://localhost:3000/';
   isCommentsShow = false;
-  commentUpload = '';
+  commentUploadText = '';
+  commentId = null;
   constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService, private commentService: CommentsService,  private alertController: AlertController, private modalController: ModalController) { }
+
+  @ViewChild(CommentsComponent, {static: false})
+  private commentComponent: CommentsComponent;
 
   ngOnInit() {
   }
@@ -123,10 +130,24 @@ export class PhotoComponent implements OnInit {
         }
     }
 
-
-    uploadComment() {
-      this.commentService.addComment(this.photo.id, this.commentUpload).subscribe((res) => {
-          this.onCommentUpload.emit();
-      })
+    editCommentEvent(event: Comment) {
+      this.commentId = event.id;
+      this.commentUploadText = event.text;
     }
+
+    addComment() {
+        console.log('from add');
+        this.commentService.addComment(this.photo.id, this.commentUploadText).subscribe((res) => {
+            this.onCommentUpload.emit();
+        });
+    }
+
+    editComment() {
+        console.log('from edit');
+        this.commentService.editComment(this.commentId, this.commentUploadText).subscribe((res) => {
+            this.onCommentUpload.emit();
+        });
+        this.commentId = null;
+    }
+
 }

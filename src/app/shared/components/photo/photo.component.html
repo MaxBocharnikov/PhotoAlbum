@@ -21,9 +21,9 @@
         </div>
       </div>
   <ion-button class="photo__button" (click)="toggleComments($event)" expand="block" [disabled]="!photo.comments" [attr.checked]="0" [attr.comments]="photo.comments">Show Comments ({{photo.comments}})</ion-button>
-  <app-comments [@commentsTrigger]="'show'" *ngIf="isCommentsShow" [photoId]="photo.id"></app-comments>
+  <app-comments [@commentsTrigger]="'show'" *ngIf="isCommentsShow" [photo]="photo" (onEdit)="editCommentEvent($event)" (onDelete)="onCommentDelete.emit()"></app-comments>
   <div class="upload-comment">
-    <ion-input class="upload-comment__input" placeholder="Add Your Comment" [(ngModel)]="commentUpload"></ion-input>
-    <div (click)="uploadComment()" class="upload-comment__add"><ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon></div>
+    <ion-input class="upload-comment__input" placeholder="Add Your Comment" [(ngModel)]="commentUploadText"></ion-input>
+    <div (click)="commentId ? editComment() : addComment()" class="upload-comment__add"><ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon></div>
   </div>
 </ion-card>

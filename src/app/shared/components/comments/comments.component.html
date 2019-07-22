@@ -3,6 +3,10 @@
     <div class="comments__author"><ion-label>{{comment.user}}</ion-label></div>
     <div class="comments__text">{{comment.text}}</div>
     <div class="comments__date"><ion-label>{{comment.date | date: 'short'}}</ion-label></div>
+    <div class="comments__controls">
+      <div class="comments__edit" *ngIf="userId === comment.author_id" (click)="onEdit.emit(comment)"><ion-icon ios="ios-create" md="md-create"></ion-icon></div>
+      <div class="comments__delete" *ngIf="userId === comment.author_id || userId ===  photo.author_id" (click)="deleteComment(comment.id)"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></div>
+    </div>
   </div>
 </div>
 

@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommentsService} from '../../services/comments.service';
-import {commentsTrigger} from '../../animations/comments.animation';
+import {UserService} from '../../services/user.service';
+import {Photo} from '../../interfaces/photo';
+import {Comment} from "../../interfaces/comment";
 
 @Component({
   selector: 'app-comments',
@@ -9,14 +11,28 @@ import {commentsTrigger} from '../../animations/comments.animation';
 
 })
 export class CommentsComponent implements OnInit {
-  @Input() photoId: number;
-  comments: [Comment];
-  constructor(private commentService: CommentsService) { }
+  @Input() photo: Photo;
+  @Output() onEdit = new EventEmitter<boolean>();
+  @Output() onDelete = new EventEmitter<boolean>();
+    comments: [Comment];
+  userId: {};
+  constructor(private commentService: CommentsService, private userService: UserService) { }
 
   ngOnInit() {
-      this.commentService.getCommentsByPhotoId(this.photoId).subscribe((data: {comments}) => {
+      this.getData();
+      this.userId = this.userService.getUser().id;
+  }
+
+  getData() {
+      this.commentService.getCommentsByPhotoId(this.photo.id).subscribe((data: {comments}) => {
           this.comments = data.comments;
-      })
+      });
+  }
+
+  deleteComment(commentId) {
+    this.commentService.deleteComment(commentId).subscribe(() => {
+        this.onDelete.emit();
+    })
   }
 
 }
