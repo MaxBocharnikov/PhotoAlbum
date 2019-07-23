@@ -13,6 +13,9 @@ export class AllphotosPage implements OnInit {
   loadError = false;
   sortType = 'new';
 
+  renderPhotos = [];
+  startRenderWith = 0;
+
   constructor(private photosService: PhotosService, private alertController: AlertController, private loadingController: LoadingController) {
   }
 
@@ -48,6 +51,7 @@ export class AllphotosPage implements OnInit {
 
     setDataOnSuccess(data: [Photo]) {
         this.photos = data;
+        this.addRenderedPhotos();
     }
 
     setDataOnError() {
@@ -69,11 +73,26 @@ export class AllphotosPage implements OnInit {
       this.sortType = type;
     }
 
-   /* async showLoader() {
-        this.loading = await this.loadingController.create({
-            message: 'Loading...'
-        });
-        return await this.loading.present();
-    }*/
+    addRenderedPhotos() {
+        const RENDER_COUNT = 2;
+        for (let i = this.startRenderWith; i < this.startRenderWith + RENDER_COUNT; i++) {
+            if (i > this.photos.length - 1) {
+                break;
+            }
+            this.renderPhotos.push(this.photos[this.photos.length - i - 1]);
+        }
+        this.startRenderWith += RENDER_COUNT;
+    }
+
+    renderMorePhotos(event) {
+        setTimeout(() => {
+            this.addRenderedPhotos();
+            event.target.complete();
+            if (this.startRenderWith > this.photos.length - 1) {
+                event.target.disabled = true;
+            }
+        }, 1500);
+
+    }
 
 }
