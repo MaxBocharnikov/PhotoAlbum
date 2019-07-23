@@ -1,0 +1,18 @@
+@import '../../variables.scss';
+.toolbar__content {
+  display: flex;
+  margin: 0 10%;
+
+  .toolbar__content__sort {
+    flex: 1;
+  }
+}
+.add_photo {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  ion-icon {
+    stroke: $icon-color;
+    fill: $icon-color;
+  }
+}

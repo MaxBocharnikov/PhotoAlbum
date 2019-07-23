@@ -1,9 +1,30 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>allphotos</ion-title>
+  <ion-toolbar color="primary">
+    <h2 class="toolbar-title">Photo Album</h2>
+    <div class="toolbar__content">
+      <app-sort (onchangeSortType)="changeSort($event)"></app-sort>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ng-container *ngIf="!loadError; else error">
+      <app-photo *ngFor="let photo of renderPhotos | photoSort: sortType" [photo]="photo"></app-photo>
+    </ng-container>
+    <ng-template #error>
+      <p>Failed to Load</p>
+    </ng-template>
+  </ion-list>
 
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="renderMorePhotos($event)">
+    <ion-infinite-scroll-content
+            loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+
+

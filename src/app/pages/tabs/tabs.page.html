@@ -6,14 +6,21 @@
       <ion-label>All Photos</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="myphotos">
+    <ion-tab-button *ngIf="true" tab="myphotos">
       <ion-icon name="image"></ion-icon>
       <ion-label>My Photos</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="user">
-      <ion-icon name="person"></ion-icon>
-      <ion-label>User</ion-label>
+        <ion-icon name="person"></ion-icon>
+        <div *ngIf="true; then profile  else auth"></div>
+        <ng-template #auth>
+            <ion-label>Sign In</ion-label>
+        </ng-template>
+  
+        <ng-template #profile>
+            <ion-label>Profile</ion-label>
+        </ng-template>
     </ion-tab-button>
 
   </ion-tab-bar>

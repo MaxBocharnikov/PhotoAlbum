@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.page.scss'],
 })
 export class UserPage implements OnInit {
-
-  constructor() { }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
+  }
+
+  toggleLog() {
+   // this.userService.authToggle();
   }
 
 }

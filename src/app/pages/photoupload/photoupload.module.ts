@@ -1,28 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AllphotosPage } from './allphotos.page';
-import {SharedModule} from '../../shared/components/shared.module';
+import { PhotouploadPage } from './photoupload.page';
+
 const routes: Routes = [
   {
     path: '',
-    component: AllphotosPage
+    component: PhotouploadPage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+      FormsModule,
     IonicModule,
-      SharedModule,
+      ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AllphotosPage],
-    exports: [RouterModule]
+  declarations: [PhotouploadPage]
 })
-export class AllphotosPageModule {}
+export class PhotouploadPageModule {}
