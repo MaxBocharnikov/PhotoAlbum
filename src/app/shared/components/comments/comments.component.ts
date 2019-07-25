@@ -4,6 +4,7 @@ import {UserService} from '../../services/user.service';
 import {Photo} from '../../interfaces/photo';
 import {Comment} from '../../interfaces/comment';
 import {AlertController} from '@ionic/angular';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-comments',
@@ -17,11 +18,12 @@ export class CommentsComponent implements OnInit {
   @Output() onDelete = new EventEmitter<number>();
     comments: [Comment];
   userId: {};
-  constructor(private commentService: CommentsService, private userService: UserService, private alertController: AlertController) { }
+  constructor(private commentService: CommentsService, private userService: UserService, private alertController: AlertController, private authService: AuthService) { }
 
   ngOnInit() {
       this.getData();
-      this.userId = this.userService.getUser().id;
+      this.userId = this.authService.isLogin() ?  this.userService.user.id : null;
+      console.log(this.userId);
   }
 
   getData() {

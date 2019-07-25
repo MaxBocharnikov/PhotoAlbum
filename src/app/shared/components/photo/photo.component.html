@@ -22,7 +22,7 @@
       </div>
   <ion-button class="photo__button" (click)="toggleComments($event)" expand="block" [disabled]="!photo.comments" [attr.comments]="photo.comments">{{commentsButtonText}}</ion-button>
   <app-comments [@commentsTrigger]="'show'" *ngIf="isCommentsShow" [photo]="photo" (onEdit)="editCommentButtonClick($event)" (onDelete)="dicrementCommentCount()"></app-comments>
-  <div class="upload-comment">
+  <div *ngIf="authSevice.isLogin()" class="upload-comment">
     <ion-input #commentInput class="upload-comment__input" placeholder="Add Your Comment" [(ngModel)]="commentUploadText"></ion-input>
     <button (click)="commentId ? editComment() : addComment()" [disabled]="!commentUploadText.length > 0" class="upload-comment__add"><ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon></button>
   </div>

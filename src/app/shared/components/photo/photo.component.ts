@@ -7,9 +7,10 @@ import {ActionSheetController, AlertController, ModalController} from '@ionic/an
 import {PhotosService} from '../../services/photos.service';
 import {PhotouploadPage} from '../../../pages/photoupload/photoupload.page';
 import {commentsTrigger} from '../../animations/comments.animation';
-import {CommentsService} from "../../services/comments.service";
-import {Comment} from "../../interfaces/comment";
-import {CommentsComponent} from "../comments/comments.component";
+import {CommentsService} from '../../services/comments.service';
+import {Comment} from '../../interfaces/comment';
+import {CommentsComponent} from '../comments/comments.component';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-photo',
@@ -26,7 +27,7 @@ export class PhotoComponent implements OnInit {
   isCommentsShow = false;
   commentUploadText = '';
   commentId = null;
-  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService, private commentService: CommentsService,  private alertController: AlertController, private modalController: ModalController, private appRef: ApplicationRef) { }
+  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService, private commentService: CommentsService,  private alertController: AlertController, private modalController: ModalController, private appRef: ApplicationRef, private authSevice: AuthService) { }
 
   @ViewChild('commentInput') commentInput;
   @ViewChild(CommentsComponent)

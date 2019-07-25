@@ -14,7 +14,8 @@ const routes: Routes = [
       children: [
           {path: 'allphotos', loadChildren: '../allphotos/allphotos.module#AllphotosPageModule'},
           {path: 'myphotos', loadChildren: '../myphotos/myphotos.module#MyphotosPageModule'},
-          {path: 'user', loadChildren: '../user/user.module#UserPageModule'}
+          {path: 'login', loadChildren: '../login/login.module#LoginPageModule'},
+          {path: 'profile', loadChildren: '../profile/profile.module#ProfilePageModule'},
       ]
   },
     {

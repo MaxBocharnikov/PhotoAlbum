@@ -18,7 +18,7 @@ export class MyphotosPage implements OnInit {
   constructor(private userService: UserService, private photoService: PhotosService, private modalController: ModalController, private alertController: AlertController, private appRef: ApplicationRef) { }
 
       ngOnInit() {
-        this.user = this.userService.getUser();
+        this.user = this.userService.user.id;
         this.getData();
       }
 
