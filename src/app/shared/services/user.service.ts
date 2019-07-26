@@ -17,4 +17,12 @@ export class UserService {
     return this.http.get(this.url + '/current-user');
   }
 
+  checkLoginExistence(login) {
+    return this.http.post(this.url + '/checkUserExistance', {login: login.value});
+  }
+
+  register(data) {
+    return this.http.post(this.url + '/register', data);
+  }
+
 }

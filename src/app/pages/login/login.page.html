@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-  <form method="post" action="" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form class="form" method="post" action="" [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <div class="form__group">
       <ion-label>Login
@@ -14,10 +14,11 @@
     </div>
     <div class="form__group">
       <ion-label>Password
-        <ion-textarea name="password" formControlName="password"></ion-textarea>
+        <ion-input type="password" name="password" formControlName="password"></ion-input>
       </ion-label>
     </div>
     <p class="form__error">{{errorMessage}}</p>
     <ion-button [disabled]="form.invalid"  class="form__submit" type="submit">Sign In</ion-button>
+    <a [routerLink]="['/registration']">Sign Up</a>
   </form>
 </ion-content>

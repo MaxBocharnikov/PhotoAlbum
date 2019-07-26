@@ -25,14 +25,7 @@ export class LoginPage implements OnInit {
 
   onSubmit() {
     this.userService.getUserByLogin(this.form.value).subscribe((data) => {
-      this.authService.accessToken = data['token'];
-      this.userService.getCurrentUser().subscribe((data) => {
-        this.userService.user = data['user'];
-        this.authService.login();
-        this.router.navigate(['/tabs/profile']);
-      },
-          (message) => { this.errorMessage = message.error; }
-      );
+      this.authService.onLogin(data);
 
     }, (message) => {
       this.errorMessage = message.error;
