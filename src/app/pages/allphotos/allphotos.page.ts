@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PhotosService} from '../../shared/services/photos.service';
 import {Photo} from '../../shared/interfaces/photo';
-import {AlertController, LoadingController} from '@ionic/angular';
+import {AlertController, IonInfiniteScroll, LoadingController} from '@ionic/angular';
 @Component({
   selector: 'app-allphotos',
   templateUrl: './allphotos.page.html',
@@ -19,6 +19,8 @@ export class AllphotosPage implements OnInit {
   constructor(private photosService: PhotosService, private alertController: AlertController, private loadingController: LoadingController) {
   }
 
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
   ngOnInit() {
       this.getData();
   }
@@ -35,6 +37,9 @@ export class AllphotosPage implements OnInit {
 
     doRefresh(event) {
       this.photosService.getAllPhotos().subscribe((data: [Photo]) => {  // Повторение кода в ngOnInit. Необоходимо продумать структуру.
+              this.startRenderWith = 0;
+              this.renderPhotos = [];
+              this.infiniteScroll.disabled = false;
               this.setDataOnSuccess(data);
               setTimeout(() => {
                   event.target.complete();

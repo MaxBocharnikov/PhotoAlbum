@@ -17,19 +17,16 @@ export class CommentsComponent implements OnInit {
   @Output() onEdit = new EventEmitter<boolean>();
   @Output() onDelete = new EventEmitter<number>();
     comments: [Comment];
-  userId: {};
   constructor(private commentService: CommentsService, private userService: UserService, private alertController: AlertController, private authService: AuthService) { }
 
   ngOnInit() {
       this.getData();
-      this.userId = this.authService.isLogin() ?  this.userService.user.id : null;
-      console.log(this.userId);
   }
 
   getData() {
       this.commentService.getCommentsByPhotoId(this.photo.id).subscribe((data: {comments}) => {
           this.comments = data.comments;
-      }, (error) => {
+      }, () => {
         this.presentLoadErrorAlert();
       });
   }
