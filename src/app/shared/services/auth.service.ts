@@ -17,7 +17,11 @@ export class AuthService {
   }
 
   logout() {
+      console.log('logout');
       this.isAuthicated = false;
+      this.accessToken = null;
+      this.userService.user = null;
+      console.log(this.accessToken);
   }
 
   isLogin(): boolean {
@@ -30,7 +34,7 @@ export class AuthService {
       this.userService.getCurrentUser().subscribe((data) => {
               this.userService.user = data['user'];
               this.login();
-              this.router.navigate(['/tabs/profile']);
+              this.router.navigate(['/tabs/myphotos']);
           },
       () => {
         this.presentAlert();

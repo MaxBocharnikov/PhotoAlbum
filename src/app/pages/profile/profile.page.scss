@@ -1,0 +1,19 @@
+.form__input {
+  margin-top: 5px;
+}
+
+.form__mode {
+  text-align: right;
+
+  ion-icon {
+    zoom: 1.5;
+    fill: #3880ff;
+  }
+}
+
+.disabled .form__input {
+  background: lightgrey;
+}
+
+
+

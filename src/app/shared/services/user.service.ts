@@ -25,4 +25,8 @@ export class UserService {
     return this.http.post(this.url + '/register', data);
   }
 
+  changeUser(data) {
+    return this.http.put(this.url + '/changeUser', data);
+  }
+
 }

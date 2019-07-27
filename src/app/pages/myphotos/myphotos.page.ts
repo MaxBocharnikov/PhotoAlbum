@@ -1,8 +1,8 @@
-import {ApplicationRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ApplicationRef, Component, OnInit} from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import { PhotosService } from '../../shared/services/photos.service';
 import { Photo } from '../../shared/interfaces/photo';
-import {AlertController, ModalController, PopoverController} from '@ionic/angular';
+import {AlertController, ModalController} from '@ionic/angular';
 import { PhotouploadPage } from '../photoupload/photoupload.page';
 
 @Component({

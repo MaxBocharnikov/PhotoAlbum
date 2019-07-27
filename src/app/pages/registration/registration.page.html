@@ -10,8 +10,8 @@
 <ion-content padding>
   <form class="form" method="post" action="" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form__group">
-      <ion-label>Login
-        <ion-input name="login" formControlName="login"></ion-input>
+      <ion-label class="form__label">Login
+        <ion-input class="form__input" name="login" formControlName="login"></ion-input>
       </ion-label>
     </div>
     <p class="form__error" *ngIf="form.get('login').invalid && form.get('login').touched">
@@ -19,24 +19,24 @@
       <span *ngIf="form.get('login').errors['loginExistanceError']">This login already exists</span>
     </p>
     <div class="form__group">
-      <ion-label>Name
-        <ion-input name="name" formControlName="name"></ion-input>
+      <ion-label class="form__label">Name
+        <ion-input class="form__input"  name="name" formControlName="name"></ion-input>
       </ion-label>
     </div>
     <p class="form__error" *ngIf="form.get('name').invalid && form.get('name').touched">
       <span *ngIf="form.get('name').errors['required']">Enter Name</span>
     </p>
     <div class="form__group">
-      <ion-label>Password
-        <ion-input type="password" name="password" formControlName="password"></ion-input>
+      <ion-label class="form__label">Password
+        <ion-input  class="form__input" type="password" name="password" formControlName="password"></ion-input>
       </ion-label>
       <p class="form__error" *ngIf="form.get('password').invalid && form.get('password').touched">
         <span *ngIf="form.get('password').errors['required']">Enter Password</span>
       </p>
     </div>
     <div class="form__group">
-      <ion-label>Repeat Password
-        <ion-input type="password" name="rpassword" formControlName="rpassword"></ion-input>
+      <ion-label class="form__label">Repeat Password
+        <ion-input  class="form__input" type="password" name="rpassword" formControlName="rpassword"></ion-input>
       </ion-label>
       <p class="form__error" *ngIf="form.get('rpassword').invalid && form.get('rpassword').touched">
         <span *ngIf="form.get('rpassword').errors['checkRepeatPasswordEquals']">Password are not equals</span>
