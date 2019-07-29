@@ -30,7 +30,7 @@ export class PhotoSortPipe implements PipeTransform {
             break;
         case 'Favorite':
             return photos.sort((left: any, right: any) => {
-                return right.commonRating - left.commonRating;
+                return right.likes - left.likes;
             });
             break;
         default:

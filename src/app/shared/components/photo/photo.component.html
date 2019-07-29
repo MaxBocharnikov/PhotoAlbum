@@ -13,11 +13,12 @@
           <ion-icon *ngFor="let photo of getStars(photo.commonRating).starOut" name="star-outline"></ion-icon>
         </div>
       </div>
-      <div class="photo__additional" *ngIf="profileMod">
+      <div class="photo__additional">
         <div class="photo__update-date">Updated {{photo.editDate | date: 'short'}}</div>
         <div class="photo__feedback">
           <div class="photo-views"><ion-icon name="eye"></ion-icon> <ion-label>1</ion-label></div>
-          <div class="photo-likes"><ion-icon name="heart-empty"></ion-icon><ion-label>1</ion-label></div>
+          <div *ngIf="profileMod" class="photo-likes"><ion-icon name="heart-empty"></ion-icon><ion-label>{{photo.likes}}</ion-label></div>
+          <div *ngIf="!profileMod" (click)="toggleLike()" class="photo-likes" [ngClass]="{'liked': liked}"><ion-icon name="heart-empty"></ion-icon><ion-label>{{photo.likes}}</ion-label></div>
         </div>
       </div>
   <ion-button class="photo__button" (click)="toggleComments($event)" expand="block" [disabled]="!photo.comments" [attr.comments]="photo.comments">{{commentsButtonText}}</ion-button>
