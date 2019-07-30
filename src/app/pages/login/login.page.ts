@@ -25,7 +25,8 @@ export class LoginPage implements OnInit {
 
   onSubmit() {
     this.userService.getUserByLogin(this.form.value).subscribe((data) => {
-      this.authService.onLogin(data);
+      this.authService.setAuthCookie(data);
+      this.authService.login();
 
     }, (message) => {
       this.errorMessage = message.error;

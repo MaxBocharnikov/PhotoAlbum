@@ -26,7 +26,8 @@ export class RegistrationPage implements OnInit {
 
   onSubmit() {
     this.userService.register(this.form.value).subscribe((data) => {
-        this.authService.onLogin(data);
+        this.authService.setAuthCookie(data);
+        this.authService.login();
     }, () => {
       this.errorMessage = 'Something went wrong. Please repeat your attempt';
     })
