@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TabsPage } from './tabs.page';
+import {AuthGuardService} from '../../shared/services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -13,8 +14,9 @@ const routes: Routes = [
     component: TabsPage,
       children: [
           {path: 'allphotos', loadChildren: '../allphotos/allphotos.module#AllphotosPageModule'},
-          {path: 'myphotos', loadChildren: '../myphotos/myphotos.module#MyphotosPageModule'},
-          {path: 'user', loadChildren: '../user/user.module#UserPageModule'}
+          {path: 'myphotos', loadChildren: '../myphotos/myphotos.module#MyphotosPageModule', canActivate: [AuthGuardService]},
+          {path: 'login', loadChildren: '../login/login.module#LoginPageModule'},
+          {path: 'profile', loadChildren: '../profile/profile.module#ProfilePageModule',  canActivate: [AuthGuardService]},
       ]
   },
     {

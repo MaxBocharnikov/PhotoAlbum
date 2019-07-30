@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <h2 class="toolbar-title">Login</h2>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form class="form" method="post" action="" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form__group">
+        <ion-input class="form__input" placeholder="Login" name="login" formControlName="login"></ion-input>
+    </div>
+    <div class="form__group">
+        <ion-input class="form__input" placeholder="Password" type="password" name="password" formControlName="password"></ion-input>
+    </div>
+    <p class="form__error">{{errorMessage}}</p>
+    <ion-button [disabled]="form.invalid"  class="form__submit" type="submit">Sign In</ion-button>
+    <a class="form__link" [routerLink]="['/registration']">Sign Up</a>
+  </form>
+</ion-content>

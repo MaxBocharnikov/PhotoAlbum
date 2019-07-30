@@ -9,4 +9,5 @@ export class Photo {
     editDate: string;
     commonRating: number;
     comments: number;
+    likes: number;
 }

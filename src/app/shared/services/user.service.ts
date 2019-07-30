@@ -1,17 +1,32 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private user: {id: number, name: string} = {
-    id: 1,
-    name: 'Max Bocharnikov'
-  };
+  url = 'http://localhost:3000';
+  user = null;
+  constructor(private http: HttpClient) { }
 
-  getUser(): {id: number, name: string} {
-    return this.user;
+  getUserByLogin(data){
+    return this.http.post(this.url + '/login', data);
   }
-  constructor() { }
+
+  getCurrentUser() {
+    return this.http.get(this.url + '/current-user');
+  }
+
+  checkLoginExistence(login) {
+    return this.http.post(this.url + '/checkUserExistance', {login: login.value});
+  }
+
+  register(data) {
+    return this.http.post(this.url + '/register', data);
+  }
+
+  changeUser(data) {
+    return this.http.put(this.url + '/changeUser', data);
+  }
 
 }

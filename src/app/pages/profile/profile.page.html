@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <h2 class="toolbar-title">Profile</h2>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form class="form" method="post" action="" [formGroup]="form">
+    <div class="form__mode">
+      <ion-icon *ngIf="isEditMode" name="save" (click)="save()"></ion-icon>
+      <ion-icon *ngIf="!isEditMode" name="create" (click)="edit()"></ion-icon>
+    </div>
+    <fieldset [ngClass]="{'disabled': !isEditMode}" style="border: none" [disabled]="isDisabled">
+      <div class="form__group">
+        <ion-label>Login
+          <ion-input #login class="form__input" name="login"  formControlName="login"></ion-input>
+        </ion-label>
+      </div>
+      <ion-label>Name
+        <ion-input class="form__input" name="name" formControlName="name"></ion-input>
+      </ion-label>
+      <p class="form__error">{{errorMessage}}</p>
+      <a class="form__link" (click)="logOut()">Log Out</a>
+    </fieldset>
+  </form>
+</ion-content>
+

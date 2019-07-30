@@ -1,5 +1,5 @@
 import {
-    ApplicationRef, Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output,
+    ApplicationRef, Component, EventEmitter, Input, OnInit, Output,
     ViewChild
 } from '@angular/core';
 import {Photo} from '../../interfaces/photo';
@@ -7,9 +7,11 @@ import {ActionSheetController, AlertController, ModalController} from '@ionic/an
 import {PhotosService} from '../../services/photos.service';
 import {PhotouploadPage} from '../../../pages/photoupload/photoupload.page';
 import {commentsTrigger} from '../../animations/comments.animation';
-import {CommentsService} from "../../services/comments.service";
-import {Comment} from "../../interfaces/comment";
-import {CommentsComponent} from "../comments/comments.component";
+import {CommentsService} from '../../services/comments.service';
+import {Comment} from '../../interfaces/comment';
+import {CommentsComponent} from '../comments/comments.component';
+import {AuthService} from '../../services/auth.service';
+import {LikesService} from '../../services/likes.service';
 
 @Component({
   selector: 'app-photo',
@@ -26,7 +28,8 @@ export class PhotoComponent implements OnInit {
   isCommentsShow = false;
   commentUploadText = '';
   commentId = null;
-  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService, private commentService: CommentsService,  private alertController: AlertController, private modalController: ModalController, private appRef: ApplicationRef) { }
+  liked = 0;
+  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService, private commentService: CommentsService,  private alertController: AlertController, private modalController: ModalController, private appRef: ApplicationRef, private authSevice: AuthService, private likesService: LikesService) { }
 
   @ViewChild('commentInput') commentInput;
   @ViewChild(CommentsComponent)
@@ -34,6 +37,11 @@ export class PhotoComponent implements OnInit {
 
   ngOnInit() {
      this.commentsButtonText = `Show Comments (${this.photo.comments})`;
+     if (this.authSevice.isLogin() && !this.profileMod) {
+         this.likesService.isLiked(this.photo.id).subscribe((data: {isLike:number}) => {
+             this.liked = data.isLike;
+         })
+     }
   }
 
 
@@ -176,6 +184,34 @@ export class PhotoComponent implements OnInit {
         });
 
         await alert.present();
+    }
+
+    addLike() {
+        this.likesService.addLike(this.photo.id).subscribe(() => {
+            this.photo.likes++;
+            this.liked = 1;
+        })
+    }
+
+    removeLike() {
+        this.likesService.removeLike(this.photo.id).subscribe(() => {
+            this.photo.likes--;
+            this.liked = 0;
+        })
+    }
+
+
+    toggleLike() {
+      if (!this.authSevice.isLogin() || this.profileMod) {
+          return;
+      }
+      if (this.liked) {
+          this.removeLike();
+
+      } else {
+          this.addLike();
+      }
+
     }
 
 }

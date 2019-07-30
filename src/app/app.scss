@@ -17,5 +17,44 @@
   color: $icon-color;
 }
 
+ion-content{
+   --ion-background-color: #EEE;
+}
+
+.form {
+  margin-top: 35%;
+}
+
+.form__error {
+  display: block;
+  font-size: 12px;
+  margin-top: 5px;
+  color: #FF0800;
+
+  padding: 0 16px;
+}
+.form__input {
+  padding: 5px !important;
+  margin-bottom: 10px;
+  background: #fff;
+}
+
+.form__submit {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.form__link {
+  float: right;
+  text-decoration: none;
+}
+
+.liked {
+  ion-icon {
+    color: #FF0000;
+  }
+}
+
+
 
 

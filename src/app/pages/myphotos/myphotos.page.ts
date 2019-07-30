@@ -1,8 +1,8 @@
-import {ApplicationRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ApplicationRef, Component, OnInit} from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import { PhotosService } from '../../shared/services/photos.service';
 import { Photo } from '../../shared/interfaces/photo';
-import {AlertController, ModalController, PopoverController} from '@ionic/angular';
+import {AlertController, ModalController} from '@ionic/angular';
 import { PhotouploadPage } from '../photoupload/photoupload.page';
 
 @Component({
@@ -12,18 +12,16 @@ import { PhotouploadPage } from '../photoupload/photoupload.page';
 })
 export class MyphotosPage implements OnInit {
 
-  private user: { id: number};
   private userPhotos: Photo[];
   sortType = 'new';
   constructor(private userService: UserService, private photoService: PhotosService, private modalController: ModalController, private alertController: AlertController, private appRef: ApplicationRef) { }
 
       ngOnInit() {
-        this.user = this.userService.getUser();
         this.getData();
       }
 
       getData() {
-          this.photoService.getUserPhotos(this.user.id).subscribe((data: Photo[]) => {
+          this.photoService.getUserPhotos(this.userService.user.id).subscribe((data: Photo[]) => {
                   this.userPhotos = data;
               },
               (error) => {
