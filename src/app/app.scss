@@ -6,6 +6,12 @@
 // and used throughout the application.
 @import './variables.scss';
 
+ion-app {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+
 .toolbar-title {
   display: block;
   font-size: 18px;
