@@ -13,8 +13,13 @@ import { PhotouploadPage } from '../photoupload/photoupload.page';
 export class MyphotosPage implements OnInit {
 
   private userPhotos: Photo[];
-  sortType = 'new';
-  constructor(private userService: UserService, private photoService: PhotosService, private modalController: ModalController, private alertController: AlertController, private appRef: ApplicationRef) { }
+  sortType = 'New';
+  constructor(
+      private userService: UserService,
+      private photoService: PhotosService,
+      private modalController: ModalController,
+      private alertController: AlertController,
+      private appRef: ApplicationRef) { }
 
       ngOnInit() {
         this.getData();
@@ -32,6 +37,9 @@ export class MyphotosPage implements OnInit {
      async addPhoto() {
           const modal = await this.modalController.create({
               component: PhotouploadPage,
+              componentProps: {
+                  isNew: true
+              }
           });
           modal.onDidDismiss()
              .then((data) => {
@@ -58,4 +66,12 @@ export class MyphotosPage implements OnInit {
       changeSort(type: string) {
          this.sortType = type;
       }
+
+    doRefresh(event) {
+      this.getData();
+        setTimeout(() => {
+            event.target.complete();
+        }, 500);
+    }
+
 }

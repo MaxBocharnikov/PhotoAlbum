@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../shared/services/user.service';
 import {AuthService} from '../../shared/services/auth.service';
-import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AlertController} from '@ionic/angular';
 
@@ -14,7 +13,10 @@ export class ProfilePage implements OnInit {
 
     @ViewChild('login') login;
 
-  constructor(private userService: UserService, private authService: AuthService, private router: Router, private alertController: AlertController) { }
+  constructor(
+      private userService: UserService,
+      private authService: AuthService,
+      private alertController: AlertController) { }
 
     form = new FormGroup({
         login: new FormControl(this.userService.user.login, [Validators.required]),
@@ -31,9 +33,7 @@ export class ProfilePage implements OnInit {
   logOut() {
     this.authService.logout();
     window.location.replace('tabs/login');
-    //this.router.navigate(['/tabs/login']);
   }
-
 
   edit() {
     this.isEditMode = true;
@@ -41,7 +41,6 @@ export class ProfilePage implements OnInit {
   }
 
   save() {
-    console.log(this.form.value);
     this.userService.changeUser(this.form.value).subscribe(() => {
         this.isEditMode = false;
     }, () => {

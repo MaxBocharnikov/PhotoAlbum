@@ -6,17 +6,17 @@
       <ion-label>All Photos</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button *ngIf="authService.isLogin()" tab="myphotos">
+    <ion-tab-button *ngIf="authService.isLogin" tab="myphotos">
       <ion-icon name="image"></ion-icon>
       <ion-label>My Photos</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button *ngIf="!authService.isLogin()" tab="login">
+    <ion-tab-button *ngIf="!authService.isLogin" tab="login">
         <ion-icon name="person"></ion-icon>
         <ion-label>Sign In</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button *ngIf="authService.isLogin()" tab="profile">
+    <ion-tab-button *ngIf="authService.isLogin" tab="profile">
         <ion-icon name="person"></ion-icon>
         <ion-label>Profile</ion-label>
     </ion-tab-button>

@@ -3,18 +3,14 @@
       <ion-img  class="photo__img" [src]="serverUrl + photo.imageUrl"></ion-img>
       <ion-card-title>
         <div class="photo__title">{{photo.title}}</div>
-        <span *ngIf="profileMod" class="photo__controls" (click)="showActions()">...</span>
+        <ion-icon name="more" *ngIf="profileMod" class="photo__controls" (click)="showActions()">...</ion-icon>
       </ion-card-title>
       <p class="photo__text">{{photo.description}}</p>
       <div class="photo__info">
         <ion-label class="photo__date">Added {{photo.uploadDate | date: 'short'}}</ion-label>
-        <div class="photo__rating">
-          <ion-icon *ngFor="let photo of getStars(photo.commonRating).star" name="star"></ion-icon>
-          <ion-icon *ngFor="let photo of getStars(photo.commonRating).starOut" name="star-outline"></ion-icon>
-        </div>
       </div>
       <div class="photo__additional">
-        <div class="photo__update-date">Updated {{photo.editDate | date: 'short'}}</div>
+        <div class="photo-update-date">Updated {{photo.editDate | date: 'short'}}</div>
         <div class="photo__feedback">
           <div class="photo-views"><ion-icon name="eye"></ion-icon> <ion-label>1</ion-label></div>
           <div *ngIf="profileMod" class="photo-likes"><ion-icon name="heart"></ion-icon><ion-label>{{photo.likes}}</ion-label></div>
@@ -23,8 +19,8 @@
       </div>
   <ion-button class="photo__button" (click)="toggleComments($event)" expand="block" [disabled]="!photo.comments" [attr.comments]="photo.comments">{{commentsButtonText}}</ion-button>
   <app-comments [@commentsTrigger]="'show'" *ngIf="isCommentsShow" [photo]="photo" (onEdit)="editCommentButtonClick($event)" (onDelete)="dicrementCommentCount()"></app-comments>
-  <div *ngIf="authSevice.isLogin()" class="upload-comment">
-    <ion-input #commentInput class="upload-comment__input" placeholder="Add Your Comment" [(ngModel)]="commentUploadText"></ion-input>
-    <button (click)="commentId ? editComment() : addComment()" [disabled]="!commentUploadText.length > 0" class="upload-comment__add"><ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon></button>
+  <div *ngIf="authSevice.isLogin" class="upload-comment">
+    <ion-input #commentInput class="upload-comment-input" placeholder="Add Your Comment" [(ngModel)]="commentUploadText"></ion-input>
+    <button (click)="commentId ? editComment() : addComment()" [disabled]="!commentUploadText.length > 0" class="upload-comment-add"><ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon></button>
   </div>
 </ion-card>

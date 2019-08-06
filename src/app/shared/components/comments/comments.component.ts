@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommentsService} from '../../services/comments.service';
-import {UserService} from '../../services/user.service';
 import {Photo} from '../../interfaces/photo';
 import {Comment} from '../../interfaces/comment';
 import {AlertController} from '@ionic/angular';
-import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-comments',
@@ -17,7 +15,7 @@ export class CommentsComponent implements OnInit {
   @Output() onEdit = new EventEmitter<boolean>();
   @Output() onDelete = new EventEmitter<number>();
     comments: [Comment];
-  constructor(private commentService: CommentsService, private userService: UserService, private alertController: AlertController, private authService: AuthService) { }
+  constructor(private commentService: CommentsService, private alertController: AlertController) { }
 
   ngOnInit() {
       this.getData();
@@ -30,28 +28,6 @@ export class CommentsComponent implements OnInit {
         this.presentLoadErrorAlert();
       });
   }
-  async presentAlertDeletingConfirm(commentId) {
-      const alert = await this.alertController.create({
-          header: 'Delete Confirm',
-          message: 'Are you sure you want to delete this comment?',
-          buttons: [
-              {
-                  text: 'Cancel',
-                  role: 'cancel',
-                  handler: () => {
-                  }
-              }, {
-                  text: 'Okay',
-                  handler: () => {
-                      this.deleteComment(commentId);
-                  }
-              }
-          ]
-      });
-
-      await alert.present();
-  }
-
     async presentLoadErrorAlert() {
         const alert = await this.alertController.create({
             header: 'Error',

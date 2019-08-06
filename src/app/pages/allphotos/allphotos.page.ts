@@ -16,27 +16,26 @@ export class AllphotosPage implements OnInit {
   renderPhotos = [];
   startRenderWith = 0;
 
-  constructor(private photosService: PhotosService, private alertController: AlertController, private loadingController: LoadingController) {
-  }
+  constructor(
+      private photosService: PhotosService,
+      private alertController: AlertController) {}
 
-    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   ngOnInit() {
       this.getData();
   }
-
   getData() {
       this.photosService.getAllPhotos().subscribe((data: [Photo]) => {
-              this.setDataOnSuccess(data);
+          this.setDataOnSuccess(data);
           },
           (error) => {
-              this.setDataOnError();
+            this.setDataOnError();
           }
       );
   }
-
     doRefresh(event) {
-      this.photosService.getAllPhotos().subscribe((data: [Photo]) => {  // Повторение кода в ngOnInit. Необоходимо продумать структуру.
+      this.photosService.getAllPhotos().subscribe((data: [Photo]) => {
               this.startRenderWith = 0;
               this.renderPhotos = [];
               this.infiniteScroll.disabled = false;
@@ -53,31 +52,25 @@ export class AllphotosPage implements OnInit {
             }
         );
     }
-
     setDataOnSuccess(data: [Photo]) {
         this.photos = data;
         this.addRenderedPhotos();
     }
-
     setDataOnError() {
         this.loadError = true;
         this.presentAlert();
     }
-
     async presentAlert() {
         const alert = await this.alertController.create({
             header: 'Failed to Load',
             message: 'Something went wrong. Please refresh this page',
             buttons: ['OK']
         });
-
         await alert.present();
     }
-
     changeSort(type: string) {
       this.sortType = type;
     }
-
     addRenderedPhotos() {
         const RENDER_COUNT = 2;
         for (let i = this.startRenderWith; i < this.startRenderWith + RENDER_COUNT; i++) {
@@ -88,7 +81,6 @@ export class AllphotosPage implements OnInit {
         }
         this.startRenderWith += RENDER_COUNT;
     }
-
     renderMorePhotos(event) {
         setTimeout(() => {
             this.addRenderedPhotos();

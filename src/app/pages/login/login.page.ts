@@ -18,7 +18,9 @@ export class LoginPage implements OnInit {
 
   errorMessage =  '';
 
-  constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
+  constructor(
+      private userService: UserService,
+      private authService: AuthService) { }
 
   ngOnInit() {
   }

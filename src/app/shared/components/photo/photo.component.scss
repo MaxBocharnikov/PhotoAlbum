@@ -34,7 +34,7 @@ ion-card-title {
   object-position: 7%;
 }
 
-.photo__date, .photo__update-date {
+.photo__date, .photo-update-date {
   font-style: italic;
 }
 
@@ -75,12 +75,12 @@ app-comments {
   display: flex;
 }
 
-.upload-comment__input {
+.upload-comment-input {
   flex: 1;
   margin: 0 5px;
 }
 
-.upload-comment__add {
+.upload-comment-add {
   background: transparent;
   ion-icon {
     fill: #008000;
