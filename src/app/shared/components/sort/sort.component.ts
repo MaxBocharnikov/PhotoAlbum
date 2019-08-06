@@ -1,5 +1,12 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 
+enum SortTypes {
+    new = 'New',
+    popular = 'Popular',
+    alphabetical = 'Alphabetical'
+};
+
+
 @Component({
   selector: 'app-sort',
   templateUrl: './sort.component.html',
@@ -7,12 +14,13 @@ import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 })
 export class SortComponent implements OnInit {
   @Output() onchangeSortType = new EventEmitter();
-  @Input('profileMod') profileMod = false;
 
-  sortBy = 'New';
+  sortBy = SortTypes.new;
+  sortTypes = SortTypes;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   onSortChange(event) {
       this.sortBy = event.target.value;

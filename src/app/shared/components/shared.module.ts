@@ -5,13 +5,14 @@ import {IonicModule} from '@ionic/angular';
 import {CommonModule} from '@angular/common';
 import {SortComponent} from './sort/sort.component';
 import {PhotoSortPipe} from '../pipes/photo-sort.pipe';
-import { Routes, RouterModule } from '@angular/router';
-import {FormGroup, FormsModule} from "@angular/forms";
+import { RouterModule } from '@angular/router';
+import {FormsModule} from "@angular/forms";
+import {CommentComponent} from './comment/comment.component';
 
 @NgModule({
     imports: [CommonModule, FormsModule,  IonicModule, RouterModule],
-    declarations: [PhotoComponent, CommentsComponent, SortComponent, PhotoSortPipe ],
-    exports: [PhotoComponent, CommentsComponent, SortComponent, PhotoSortPipe, RouterModule]
+    declarations: [PhotoComponent, CommentsComponent, CommentComponent, SortComponent, PhotoSortPipe ],
+    exports: [PhotoComponent, CommentsComponent, CommentComponent, SortComponent, PhotoSortPipe, RouterModule]
 })
 
 export class SharedModule {}

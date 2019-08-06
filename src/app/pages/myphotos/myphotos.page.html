@@ -3,11 +3,14 @@
     <h2 class="toolbar-title">My Photos</h2>
     <div class="toolbar__content" style="">
       <div (click)="addPhoto()" class="add_photo"><ion-icon name="camera" style="zoom: 2.0"></ion-icon></div>
-      <app-sort class="toolbar__content__sort" (onchangeSortType)="changeSort($event)" [profileMod]="true"></app-sort>
+      <app-sort class="toolbar__content__sort" (onchangeSortType)="changeSort($event)"></app-sort>
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <app-photo *ngFor="let photo of userPhotos | photoSort: sortType"  (onDelete)="onDeleteEvent($event)" [photo]="photo" [profileMod]="true"></app-photo>
 </ion-content>

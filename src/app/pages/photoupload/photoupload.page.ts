@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {AlertController, ModalController} from '@ionic/angular';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserService} from '../../shared/services/user.service';
 import {PhotosService} from '../../shared/services/photos.service';
 import {Photo} from '../../shared/interfaces/photo';
 
@@ -14,12 +13,16 @@ export class PhotouploadPage implements OnInit {
   form: FormGroup;
   buttonText: string;
   selectedFile: File;
-  @Input('photo') photo: Photo = null;
+  @Input('isNew') isNew: Boolean;
+  @Input('photo') photo: Photo;
   @ViewChild('fileInput') fileInput;
-  constructor(private modalController: ModalController, private userService: UserService, private photoService: PhotosService, private alertController: AlertController) {}
+  constructor(
+      private modalController: ModalController,
+      private photoService: PhotosService,
+      private alertController: AlertController) {}
 
   ngOnInit() {
-      if (!this.photo) {
+      if (this.isNew) {
           this.form = new FormGroup({
               file: new FormControl('', [Validators.required, this.checkFile]),
               title: new FormControl('', [Validators.required, this.checkForLength]),
@@ -37,15 +40,14 @@ export class PhotouploadPage implements OnInit {
   dismissModal() {
    this.modalController.dismiss();
   }
-
   onSubmit() {
-    if (!this.photo) {
+      console
+    if (this.isNew) {
         this.addPhoto();
     } else {
        this.editPhoto();
     }
   }
-
   addPhoto() {
       const formValue = this.form.value;
       const data = {
@@ -53,7 +55,6 @@ export class PhotouploadPage implements OnInit {
           title: formValue.title,
           description: formValue.description
       };
-
       this.photoService.addUserPhoto(data).subscribe((added: Photo) => {
               this.modalController.dismiss(added);
           },
@@ -62,8 +63,7 @@ export class PhotouploadPage implements OnInit {
           }
       );
   }
-
-    editPhoto() {
+  editPhoto() {
       const formValue = this.form.value;
       const data = {
           id: this.photo.id,

@@ -7,7 +7,6 @@ export class Photo {
     user: string;
     uploadDate: string;
     editDate: string;
-    commonRating: number;
     comments: number;
     likes: number;
 }

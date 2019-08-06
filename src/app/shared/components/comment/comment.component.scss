@@ -1,0 +1,35 @@
+.comments__author {
+  font-weight: 600;
+  margin-right: 10px;
+  color: #262626;
+}
+
+.comments__date {
+  font-style: italic;
+}
+
+.comments__controls {
+  display: flex;
+  position: absolute;
+  top: 15%;
+  right: 5%;
+
+  ion-icon {
+    zoom: 1.5;
+  }
+}
+
+.comments__edit {
+  margin-right: 10px;
+  ion-icon {
+    fill: #3880ff;
+  }
+
+}
+
+.comments__delete {
+  ion-icon {
+    fill: #ff0000;
+  }
+
+}

@@ -9,7 +9,9 @@ import {AuthService} from '../../shared/services/auth.service';
 })
 export class TabsPage implements OnInit {
 
-  constructor(private authService: AuthService, private userService: UserService) {}
+  constructor(
+      private authService: AuthService,
+      private userService: UserService) {}
 
   ngOnInit() {
   }

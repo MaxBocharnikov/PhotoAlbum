@@ -29,7 +29,15 @@ export class PhotoComponent implements OnInit {
   commentUploadText = '';
   commentId = null;
   liked = 0;
-  constructor(private actionSheetController: ActionSheetController, private photoService: PhotosService, private commentService: CommentsService,  private alertController: AlertController, private modalController: ModalController, private appRef: ApplicationRef, private authSevice: AuthService, private likesService: LikesService) { }
+  constructor(
+      private actionSheetController: ActionSheetController,
+      private photoService: PhotosService,
+      private commentService: CommentsService,
+      private alertController: AlertController,
+      private modalController: ModalController,
+      private appRef: ApplicationRef,
+      private authSevice: AuthService,
+      private likesService: LikesService) { }
 
   @ViewChild('commentInput') commentInput;
   @ViewChild(CommentsComponent)
@@ -37,20 +45,11 @@ export class PhotoComponent implements OnInit {
 
   ngOnInit() {
      this.commentsButtonText = `Show Comments (${this.photo.comments})`;
-     if (this.authSevice.isLogin() && !this.profileMod) {
+     if (this.authSevice.isLogin && !this.profileMod) {
          this.likesService.isLiked(this.photo.id).subscribe((data: {isLike:number}) => {
              this.liked = data.isLike;
          })
      }
-  }
-
-
-  getStars(rating: number): {} {
-      const STARS_AMOUNT = 5;
-      return {
-          star: new Array(rating),
-          starOut: new Array(STARS_AMOUNT - rating)
-      };
   }
 
   async showActions() {
@@ -116,6 +115,7 @@ export class PhotoComponent implements OnInit {
       const modal = await this.modalController.create({
           component: PhotouploadPage,
           componentProps: {
+              isNew: false,
               photo: this.photo
           }
       });
@@ -202,7 +202,7 @@ export class PhotoComponent implements OnInit {
 
 
     toggleLike() {
-      if (!this.authSevice.isLogin() || this.profileMod) {
+      if (!this.authSevice.isLogin || this.profileMod) {
           return;
       }
       if (this.liked) {
@@ -213,5 +213,4 @@ export class PhotoComponent implements OnInit {
       }
 
     }
-
 }

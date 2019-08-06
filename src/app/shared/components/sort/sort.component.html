@@ -1,6 +1,5 @@
 <ion-select class="sort-select" (ionChange)="onSortChange($event)">
-    <ion-select-option selected>New</ion-select-option>
-    <ion-select-option>Popular</ion-select-option>
-    <ion-select-option *ngIf="profileMod">Alphabetical</ion-select-option>
-    <ion-select-option *ngIf="profileMod">Favorite</ion-select-option>
+    <ion-select-option value="{{sortTypes.new}}" selected>New</ion-select-option>
+    <ion-select-option value="{{sortTypes.popular}}">Popular</ion-select-option>
+    <ion-select-option value="{{sortTypes.alphabetical}}">Alphabetical</ion-select-option>
 </ion-select>

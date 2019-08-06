@@ -13,7 +13,9 @@ export class RegistrationPage implements OnInit {
   form: FormGroup;
   errorMessage =  '';
 
-  constructor(private userService: UserService, private authService: AuthService) { }
+  constructor(
+      private userService: UserService,
+      private authService: AuthService) { }
 
   ngOnInit() {
       this.form = new FormGroup({
@@ -32,7 +34,6 @@ export class RegistrationPage implements OnInit {
       this.errorMessage = 'Something went wrong. Please repeat your attempt';
     })
   }
-
 
   checkRepeatPasswordEquals(control: FormGroup) {
     if (this.form) {
@@ -58,7 +59,4 @@ export class RegistrationPage implements OnInit {
       })
     })
   }
-
-
-
 }

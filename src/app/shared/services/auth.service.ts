@@ -9,9 +9,13 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
 
-  private isAuthicated = false;
+  private _isAuthicated = false;
   public accessToken = null;
-  constructor(private userService: UserService, private router: Router, private alertController: AlertController, private cookieService: CookieService) { }
+  constructor(
+      private userService: UserService,
+      private router: Router,
+      private alertController: AlertController,
+      private cookieService: CookieService) { }
 
 
   setAuthCookie(data) {
@@ -22,7 +26,7 @@ export class AuthService {
   login() {
       this.userService.getCurrentUser().subscribe((data) => {
               this.userService.user = data['user'];
-              this.isAuthicated = true;
+              this._isAuthicated = true;
               this.router.navigate(['/tabs/myphotos']);
           },
           () => {
@@ -36,8 +40,8 @@ export class AuthService {
       this.cookieService.delete('accessToken');
   }
 
-  isLogin(): boolean {
-    return this.isAuthicated;
+  get isLogin(): boolean {
+    return this._isAuthicated;
   }
 
 
