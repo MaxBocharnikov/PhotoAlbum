@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../shared/services/user.service';
 import {AuthService} from '../../shared/services/auth.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -37,7 +36,7 @@ export class RegistrationPage implements OnInit {
 
   checkRepeatPasswordEquals(control: FormGroup) {
     if (this.form) {
-      if (control.value !== this.form.value.password) {
+      if (control.value !== this.form.value.password && control.value) {
           return {
               checkRepeatPasswordEquals: true
           };
@@ -47,7 +46,7 @@ export class RegistrationPage implements OnInit {
   }
 
   checkExistanceLogin(control: FormGroup) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.userService.checkLoginExistence(control).subscribe((data: {answer: boolean}) => {
         if (data.answer) {
           resolve({
