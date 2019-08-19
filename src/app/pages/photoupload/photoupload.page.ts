@@ -59,7 +59,7 @@ export class PhotouploadPage implements OnInit {
               this.modalController.dismiss(added);
           },
           () => {
-              this.presentAlert();
+              this.presentUpldateAlert();
           }
       );
   }
@@ -74,12 +74,12 @@ export class PhotouploadPage implements OnInit {
               this.modalController.dismiss(added);
               },
           () => {
-              this.presentAlert();
+              this.presentEditAlert();
           }
       );
     }
 
-    async presentAlert() {
+    async presentUpldateAlert() {
         const alert = await this.alertController.create({
             header: 'Error',
             message: `The photo wasn't uploaded. Please repeat your attempt`,
@@ -89,7 +89,18 @@ export class PhotouploadPage implements OnInit {
         await alert.present();
     }
 
-  checkForTitleLength(control: FormControl) {
+    async presentEditAlert() {
+        const alert = await this.alertController.create({
+            header: 'Error',
+            message: `The photo wasn't edited. Please repeat your attempt`,
+            buttons: ['OK']
+        });
+
+        await alert.present();
+    }
+
+
+    checkForTitleLength(control: FormControl) {
     if (control.value.length > 50) {
       return {
         titleLengthError: true

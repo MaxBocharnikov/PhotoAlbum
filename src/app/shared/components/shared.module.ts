@@ -8,10 +8,11 @@ import {PhotoSortPipe} from '../pipes/photo-sort.pipe';
 import { RouterModule } from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import {CommentComponent} from './comment/comment.component';
+import {CommentsSortPipe} from '../pipes/comments-sort.pipe';
 
 @NgModule({
     imports: [CommonModule, FormsModule,  IonicModule, RouterModule],
-    declarations: [PhotoComponent, CommentsComponent, CommentComponent, SortComponent, PhotoSortPipe ],
+    declarations: [PhotoComponent, CommentsComponent, CommentComponent, SortComponent, PhotoSortPipe, CommentsSortPipe ],
     exports: [PhotoComponent, CommentsComponent, CommentComponent, SortComponent, PhotoSortPipe, RouterModule]
 })
 

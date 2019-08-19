@@ -12,7 +12,6 @@ import {AlertController} from '@ionic/angular';
 })
 export class CommentsComponent implements OnInit {
   @Input() photo: Photo;
-  @Output() onEdit = new EventEmitter<boolean>();
   @Output() onDelete = new EventEmitter<number>();
     comments: [Comment];
   constructor(private commentService: CommentsService, private alertController: AlertController) { }
@@ -31,7 +30,7 @@ export class CommentsComponent implements OnInit {
     async presentLoadErrorAlert() {
         const alert = await this.alertController.create({
             header: 'Error',
-            message: 'Comment were not loaded. Try Again',
+            message: 'Comments were not loaded. Try Again',
             buttons: ['OK']
         });
 

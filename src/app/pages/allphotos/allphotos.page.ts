@@ -23,10 +23,15 @@ export class AllphotosPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   ngOnInit() {
-      this.getData();
+
   }
+    ionViewWillEnter() {
+        this.getData();
+    }
   getData() {
       this.photosService.getAllPhotos().subscribe((data: [Photo]) => {
+              this.startRenderWith = 0;
+              this.renderPhotos = [];
           this.setDataOnSuccess(data);
           },
           (error) => {
