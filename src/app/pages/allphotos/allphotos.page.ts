@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {PhotosService} from '../../shared/services/photos.service';
 import {Photo} from '../../shared/interfaces/photo';
 import {AlertController, IonInfiniteScroll, LoadingController} from '@ionic/angular';
+import {PhotoSortPipe} from "../../shared/pipes/photo-sort.pipe";
 @Component({
   selector: 'app-allphotos',
   templateUrl: './allphotos.page.html',
@@ -11,14 +12,15 @@ export class AllphotosPage implements OnInit {
 
   photos: [Photo];
   loadError = false;
-  sortType = 'new';
+  sortType = 'New';
 
   renderPhotos = [];
   startRenderWith = 0;
 
   constructor(
       private photosService: PhotosService,
-      private alertController: AlertController) {}
+      private alertController: AlertController,
+      private photoSortPipe: PhotoSortPipe) {}
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
@@ -32,6 +34,7 @@ export class AllphotosPage implements OnInit {
       this.photosService.getAllPhotos().subscribe((data: [Photo]) => {
               this.startRenderWith = 0;
               this.renderPhotos = [];
+              this.infiniteScroll.disabled = false;
           this.setDataOnSuccess(data);
           },
           (error) => {
@@ -59,6 +62,7 @@ export class AllphotosPage implements OnInit {
     }
     setDataOnSuccess(data: [Photo]) {
         this.photos = data;
+        this.photos = this.photoSortPipe.transform(this.photos, this.sortType);
         this.addRenderedPhotos();
     }
     setDataOnError() {
@@ -75,6 +79,11 @@ export class AllphotosPage implements OnInit {
     }
     changeSort(type: string) {
       this.sortType = type;
+      this.startRenderWith = 0;
+      this.renderPhotos = [];
+      this.infiniteScroll.disabled = false;
+      this.photos = this.photoSortPipe.transform(this.photos, this.sortType);
+      this.addRenderedPhotos();
     }
     addRenderedPhotos() {
         const RENDER_COUNT = 2;
@@ -82,7 +91,7 @@ export class AllphotosPage implements OnInit {
             if (i > this.photos.length - 1) {
                 break;
             }
-            this.renderPhotos.push(this.photos[this.photos.length - i - 1]);
+            this.renderPhotos.push(this.photos[i]);
         }
         this.startRenderWith += RENDER_COUNT;
     }
