@@ -61,6 +61,20 @@ ion-content{
   }
 }
 
+.upload-comment-input {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.upload-comment-add {
+  background: transparent;
+  ion-icon {
+    fill: #008000;
+    zoom: 2.0;
+    padding: 5px 0;
+  }
+}
+
 
 
 

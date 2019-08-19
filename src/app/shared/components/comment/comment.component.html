@@ -4,4 +4,6 @@
 <div class="comments__controls">
   <div class="comments__edit" *ngIf="authService.isLogin && (userService.user.id === comment.author_id)" (click)="onEditClick.emit(comment)"><ion-icon ios="ios-create" md="md-create"></ion-icon></div>
   <div class="comments__delete" *ngIf="authService.isLogin && (userService.user.id === comment.author_id || userService.user.id ===  photo.author_id)" (click)="presentAlertDeletingConfirm(comment.id)"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></div>
+  <ion-input #commentInput class="upload-comment-input" placeholder="Edit Your Comment" [(ngModel)]="commentUploadText"></ion-input>
+  <button [disabled]="!commentUploadText.length > 0" class="upload-comment-add"><ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon></button>
 </div>

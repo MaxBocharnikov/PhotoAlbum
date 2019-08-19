@@ -25,14 +25,14 @@ export class PhotouploadPage implements OnInit {
       if (this.isNew) {
           this.form = new FormGroup({
               file: new FormControl('', [Validators.required, this.checkFile]),
-              title: new FormControl('', [Validators.required, this.checkForLength]),
-              description: new FormControl('')
+              title: new FormControl('', [Validators.required, this.checkForTitleLength]),
+              description: new FormControl('', [this.checkForDescriptionLength])
           });
           this.buttonText = 'Add Photo';
       } else {
           this.form = new FormGroup({
-              title: new FormControl(this.photo.title, [Validators.required, this.checkForLength]),
-              description: new FormControl(this.photo.description)
+              title: new FormControl(this.photo.title, [Validators.required, this.checkForTitleLength]),
+              description: new FormControl(this.photo.description, [this.checkForDescriptionLength])
           });
           this.buttonText = 'Edit Photo';
       }
@@ -89,13 +89,21 @@ export class PhotouploadPage implements OnInit {
         await alert.present();
     }
 
-  checkForLength(control: FormControl) {
+  checkForTitleLength(control: FormControl) {
     if (control.value.length > 50) {
       return {
-        lengthError: true
+        titleLengthError: true
       };
     }
   }
+
+    checkForDescriptionLength(control: FormControl) {
+        if (control.value.length > 250) {
+            return {
+                descriptionLengthError: true
+            };
+        }
+    }
 
   checkFile(control: FormControl) {
     const TYPES = ['jpg', 'JPEG', 'png', 'svg', 'gif'];
