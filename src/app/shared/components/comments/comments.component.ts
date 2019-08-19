@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CommentsService} from '../../services/comments.service';
 import {Photo} from '../../interfaces/photo';
 import {Comment} from '../../interfaces/comment';
@@ -10,9 +10,10 @@ import {AlertController} from '@ionic/angular';
   styleUrls: ['./comments.component.scss'],
 
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent implements OnInit, OnDestroy  {
   @Input() photo: Photo;
   @Output() onDelete = new EventEmitter<number>();
+  @Output() onLoad = new EventEmitter();
     comments: [Comment];
   constructor(private commentService: CommentsService, private alertController: AlertController) { }
 
@@ -20,9 +21,14 @@ export class CommentsComponent implements OnInit {
       this.getData();
   }
 
+  ngOnDestroy() {
+      this.onLoad.emit();
+  }
+
   getData() {
       this.commentService.getCommentsByPhotoId(this.photo.id).subscribe((data: {comments}) => {
           this.comments = data.comments;
+          this.onLoad.emit();
       }, () => {
         this.presentLoadErrorAlert();
       });

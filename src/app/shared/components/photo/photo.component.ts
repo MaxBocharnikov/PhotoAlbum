@@ -131,7 +131,7 @@ export class PhotoComponent implements OnInit {
 
   toggleComments() {
       this.isCommentsShow = !this.isCommentsShow;
-      this.setCommentsButtonText();
+      //this.setCommentsButtonText();
     }
 
     setCommentsButtonText() {
