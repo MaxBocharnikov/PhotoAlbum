@@ -13,7 +13,7 @@
   </ion-refresher>
   <ion-list>
     <ng-container *ngIf="!loadError; else error">
-      <app-photo *ngFor="let photo of renderPhotos | photoSort: sortType" [photo]="photo"></app-photo>
+      <app-photo *ngFor="let photo of renderPhotos" [photo]="photo"></app-photo>
     </ng-container>
     <ng-template #error>
       <p>Failed to Load</p>

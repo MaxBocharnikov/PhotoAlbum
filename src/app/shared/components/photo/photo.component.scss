@@ -25,6 +25,7 @@ ion-card-title {
 
 .photo__title {
   margin: 5px 0;
+  max-width: 85%;
 }
 
 .photo__img {
@@ -71,20 +72,5 @@ app-comments {
 }
 
 
-.upload-comment {
-  display: flex;
-}
 
-.upload-comment-input {
-  flex: 1;
-  margin: 0 5px;
-}
 
-.upload-comment-add {
-  background: transparent;
-  ion-icon {
-    fill: #008000;
-    zoom: 2.0;
-    padding: 5px 0;
-  }
-}

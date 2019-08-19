@@ -21,10 +21,10 @@ export class MyphotosPage implements OnInit {
       private alertController: AlertController,
       private appRef: ApplicationRef) { }
 
-      ngOnInit() {
+      ngOnInit() {}
+    ionViewWillEnter() {
         this.getData();
-      }
-
+    }
       getData() {
           this.photoService.getUserPhotos(this.userService.user.id).subscribe((data: Photo[]) => {
                   this.userPhotos = data;

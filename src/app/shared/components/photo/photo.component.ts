@@ -131,7 +131,7 @@ export class PhotoComponent implements OnInit {
 
   toggleComments() {
       this.isCommentsShow = !this.isCommentsShow;
-      this.setCommentsButtonText();
+      //this.setCommentsButtonText();
     }
 
     setCommentsButtonText() {
@@ -147,12 +147,6 @@ export class PhotoComponent implements OnInit {
         this.photo.comments++;
     }
 
-    editCommentButtonClick(event: Comment) {
-      this.commentId = event.id;
-      this.commentUploadText = event.text;
-      this.commentInput.setFocus();
-    }
-
     addComment() {
         this.commentService.addComment(this.photo.id, this.commentUploadText).subscribe(() => {
             this.commentUploadText = '';
@@ -161,16 +155,6 @@ export class PhotoComponent implements OnInit {
             }
             this.incrementCommentCount();
             this.setCommentsButtonText();
-        }, () => {
-            this.presentUploadErrorAlert();
-        });
-    }
-
-    editComment() {
-        this.commentService.editComment(this.commentId, this.commentUploadText).subscribe(() => {
-            this.commentUploadText = '';
-            this.commentId = null;
-            this.commentComponent.getData();
         }, () => {
             this.presentUploadErrorAlert();
         });

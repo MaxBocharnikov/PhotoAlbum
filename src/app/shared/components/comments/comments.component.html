@@ -1,6 +1,6 @@
 <div class="comments__list">
-  <div padding class="comments__item" *ngFor="let comment of comments">
-    <app-comment [comment]="comment" [photo]="photo" (onDeleteClick)="deleteComment($event)" (onEditClick)="onEdit.emit($event)" ></app-comment>
+  <div padding class="comments__item" *ngFor="let comment of comments | commentsSort ">
+    <app-comment [comment]="comment" [photo]="photo" (onDeleteClick)="deleteComment($event)"></app-comment>
   </div>
 </div>
 

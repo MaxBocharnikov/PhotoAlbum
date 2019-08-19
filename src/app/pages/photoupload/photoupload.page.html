@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Upload Photo</ion-title>
+    <ion-title *ngIf="isNew; else editPhotoTitle">Upload Photo</ion-title>
+    <ng-template #editPhotoTitle>
+      <ion-title>Edit Photo</ion-title>
+    </ng-template>
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal()">Close</ion-button>
     </ion-buttons>
@@ -25,12 +28,15 @@
       </div>
       <div *ngIf="form.get('title').invalid && form.get('title').touched">
         <span *ngIf="form.get('title').errors['required']" class="form__error">Enter Title</span>
-        <span *ngIf="form.get('title').errors['lengthError']" class="form__error">Max 50 characters</span>
+        <span *ngIf="form.get('title').errors['titleLengthError']" class="form__error">Max 50 characters</span>
       </div>
       <div class="form__group">
         <ion-label>Photo Description
           <ion-textarea name="description" formControlName="description"></ion-textarea>
         </ion-label>
+      </div>
+      <div *ngIf="form.get('description').invalid && form.get('description').touched">
+        <span *ngIf="form.get('description').errors['descriptionLengthError']" class="form__error">Max 250 characters</span>
       </div>
       <ion-button [disabled]="form.invalid"  class="form__submit" type="submit">{{buttonText}}</ion-button>
     </form>

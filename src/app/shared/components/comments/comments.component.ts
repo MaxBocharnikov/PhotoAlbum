@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CommentsService} from '../../services/comments.service';
 import {Photo} from '../../interfaces/photo';
 import {Comment} from '../../interfaces/comment';
@@ -10,10 +10,10 @@ import {AlertController} from '@ionic/angular';
   styleUrls: ['./comments.component.scss'],
 
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent implements OnInit, OnDestroy  {
   @Input() photo: Photo;
-  @Output() onEdit = new EventEmitter<boolean>();
   @Output() onDelete = new EventEmitter<number>();
+  @Output() onLoad = new EventEmitter();
     comments: [Comment];
   constructor(private commentService: CommentsService, private alertController: AlertController) { }
 
@@ -21,9 +21,14 @@ export class CommentsComponent implements OnInit {
       this.getData();
   }
 
+  ngOnDestroy() {
+      this.onLoad.emit();
+  }
+
   getData() {
       this.commentService.getCommentsByPhotoId(this.photo.id).subscribe((data: {comments}) => {
           this.comments = data.comments;
+          this.onLoad.emit();
       }, () => {
         this.presentLoadErrorAlert();
       });
@@ -31,7 +36,7 @@ export class CommentsComponent implements OnInit {
     async presentLoadErrorAlert() {
         const alert = await this.alertController.create({
             header: 'Error',
-            message: 'Comment were not loaded. Try Again',
+            message: 'Comments were not loaded. Try Again',
             buttons: ['OK']
         });
 
